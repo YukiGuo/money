@@ -14,7 +14,6 @@
 
 <style lang='scss' scoped>
     .wrap{
-        border: 1px solid red;
         height:100vh;
         overflow:auto;
         display: flex;
