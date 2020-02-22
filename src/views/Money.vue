@@ -1,7 +1,8 @@
 <template>
-    <div>
-        Money
-       <Nav />
+    <div >
+        <Layout>
+            <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>   <p> hhhhhh</p>
+        </Layout>
     </div>
 </template>
 
@@ -12,5 +13,4 @@
 </script>
 
 <style lang='scss' scoped>
-
 </style>
