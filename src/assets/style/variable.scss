@@ -1,0 +1,8 @@
+$blueColor:#1296db;
+%x{
+&::after{
+  content:'';
+  display: block;
+  clear: both;
+}
+}
