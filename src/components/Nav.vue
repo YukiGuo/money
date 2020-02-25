@@ -33,7 +33,7 @@ nav{
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        color: #8a8a8a;
+        color: red;
     }
   > .item.selected{
     color: $blueColor;
