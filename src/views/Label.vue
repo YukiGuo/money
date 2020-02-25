@@ -4,17 +4,20 @@
             <div class="wrap">
             <ul class="labels">
             <li>
-               衣
-                  <Icon name="arrow"/>
+              <span>衣</span>
+                  <Icon name="arrowright"/>
             </li>
-            <li>食
-                <Icon name="arrow"/>
+            <li>
+                <span>食</span>
+                <Icon name="arrowright"/>
             </li>
-            <li>住
-                <Icon name="arrow"/>
+            <li>
+                <span>住</span>
+                <Icon name="arrowright"/>
             </li>
-            <li>行
-                <Icon name="arrow"/>
+            <li>
+                <span>行</span>
+                <Icon name="arrowright"/>
             </li>
             </ul>
             <button>新建标签</button>
@@ -39,6 +42,10 @@
                 height: 30px;
                 margin: 10px 15px 10px 20px;
                 border-bottom: 1px solid #ddd;
+                color: #999999;
+                >span{
+                    color: #333
+                }
             }
 
         }

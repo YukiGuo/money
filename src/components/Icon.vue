@@ -17,7 +17,7 @@
     .icon {
         width: 1.5em; height: 1.5em;
         vertical-align: -0.15em;
-        color: currentColor;
+        fill: currentColor;
         overflow: hidden;
     }
 </style>

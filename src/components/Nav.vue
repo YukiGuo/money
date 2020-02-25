@@ -33,10 +33,10 @@ nav{
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        color: red;
+        color: #333;
     }
-  > .item.selected{
-    color: $blueColor;
-  }
+    > .item.selected{
+        color: $blueColor;
+    }
 }
 </style>

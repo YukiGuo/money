@@ -4,6 +4,7 @@ import Statistics from '@/views/Statistics.vue';
 import Label from '@/views/Label.vue';
 import Money from '@/views/Money.vue';
 import Notfound from '@/views/Notfound.vue';
+import LabelChange from '@/views/LabelChange.vue';
 Vue.use(VueRouter);
 
 const routes = [
@@ -22,6 +23,10 @@ const routes = [
     {
         path:'/label',
         component: Label
+    },
+    {
+        path:'/label-1',
+        component: LabelChange
     },
     {
         path:'*',
