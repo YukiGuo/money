@@ -1,8 +1,17 @@
 $blueColor:#1296db;
+$ColorShadow:rgba(0,0,0,0.4);
 %x{
 &::after{
   content:'';
   display: block;
   clear: both;
 }
+}
+
+%outerShadow{
+  box-shadow: 0 0 2px $ColorShadow
+}
+%innerShadow{
+  box-shadow: inset 0 -3px 3px -3px $ColorShadow,
+  inset 0 3px 3px -3px $ColorShadow;
 }

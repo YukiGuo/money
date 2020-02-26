@@ -1,19 +1,23 @@
 <template>
-    <div class="wrap">
-        <slot/>
-        <div class="content"> </div>
+    <div class="layoutWrap">
+
+        <div class="content" :class="`${classPrefix&&classPrefix}-content`">
+        <slot />
+        </div>
         <Nav />
+
     </div>
 </template>
 
 <script lang='ts'>
     export default {
-        name: 'Layout'
+        name: 'Layout',
+        props:['classPrefix']
     };
 </script>
 
 <style lang='scss' scoped>
-    .wrap{
+    .layoutWrap{
         height:100vh;
         overflow:auto;
         display: flex;

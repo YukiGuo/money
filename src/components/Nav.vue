@@ -22,12 +22,13 @@
 <style lang='scss' scoped>
     @import '../assets/style/variable.scss';
 nav{
+    @extend %outerShadow;
     display: flex;
     flex-direction: row;
     justify-content: center;
     padding: 5px 0;
-   box-shadow: 0 0 2px rgba(0,0,0,0.4);
     > .item{
+        text-decoration: none;
         width: 33.3333%;
         display: flex;
         flex-direction: column;
