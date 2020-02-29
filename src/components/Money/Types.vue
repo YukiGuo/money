@@ -1,14 +1,14 @@
 <template>
     <div>
         <ul class="type">
-            <li  @click="change('-')" :class="type==='-'&& 'selected'">支出</li>
+            <li @click="change('-')" :class="type==='-'&& 'selected'">支出</li>
             <li @click="change('+')" :class="type==='+'&& 'selected'">收入</li>
         </ul>
     </div>
 </template>
 
-<script lang='js'>
-    export default {
+<!--<script lang='js'>
+ export default {
         name: 'Types',
         data(){
             return{
@@ -25,8 +25,26 @@
                     }
         }
     };
+    */
 </script>
+-->
 
+<script lang="ts">
+    import Vue from 'vue';
+    import {Component, Prop} from 'vue-property-decorator';
+
+    @Component
+    export default class Types extends Vue {
+        type = '-';
+        change(type: string) {
+            if (type !== '-' && type !== '+') {
+                console.log('错误')
+            }
+            this.type = type;
+            console.log(this.type)
+        }
+    }
+</script>
 
 <style lang='scss' scoped>
     @import '~@/assets/style/variable.scss';
