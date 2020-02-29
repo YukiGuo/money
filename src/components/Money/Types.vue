@@ -1,25 +1,42 @@
 <template>
     <div>
         <ul class="type">
-            <li class="selected">支出</li>
-            <li class="">收入</li>
+            <li  @click="change('-')" :class="type==='-'&& 'selected'">支出</li>
+            <li @click="change('+')" :class="type==='+'&& 'selected'">收入</li>
         </ul>
     </div>
 </template>
 
-<script lang='ts'>
+<script lang='js'>
     export default {
-        name: 'Types'
+        name: 'Types',
+        data(){
+            return{
+                type:'-'
+            }
+        },
+        methods:{
+            change(type) {
+                if(type !== '-' && type !== '+'){
+                    console.log('错误')
+                }
+                   this.type=type;
+                   console.log(this.type)
+                    }
+        }
     };
 </script>
 
+
 <style lang='scss' scoped>
     @import '~@/assets/style/variable.scss';
+
     .type {
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
+
         > li {
             position: relative;
             height: 64px;
@@ -29,6 +46,7 @@
             justify-content: center;
             background-color: #bbb;
             font-size: 24px;
+
             &.selected::after {
                 content: '';
                 position: absolute;
