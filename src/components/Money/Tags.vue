@@ -1,28 +1,13 @@
 <template>
     <div class="tags">
         <ul>
-            <li>衣</li>
-            <li>食</li>
-            <li>住</li>
-            <li>行</li>
-            <li>衣</li>
-            <li>食</li>
-            <li>住</li>
-            <li>行</li>
-            <li>衣2hhhhhhhhhhh</li>
-            <li>食2</li>
-            <li>住2</li>
-            <li>行2</li>
-            <li>哈哈哈哈</li>
-            <li>哈哈哈哈</li>
-            <li>哈哈哈哈</li>
-            <li>哈哈哈哈</li>
-            <li>哈哈哈哈</li>
-            <li>哈哈哈哈</li>
-            <li>哈哈哈哈</li>
-            <li>哈哈哈哈</li>
-            <li>哈哈哈哈</li>
-            <li>哈哈哈哈</li>
+            <li
+                    v-for="tag in data" :key="tag"
+                    @click="toggle(tag)"
+                    :class="{selected: selectedTags.indexOf(tag)>=0}"
+            >
+                {{tag}}
+            </li>
         </ul>
         <div class="new">
             <button>新增标签</button>
@@ -32,9 +17,22 @@
 </template>
 
 <script lang='ts'>
-    export default {
-        name: 'Tags'
-    };
+    import Vue from 'vue';
+    import {Component, Prop} from 'vue-property-decorator';
+
+    @Component
+    export default class Tags extends Vue {
+        @Prop() data: string[] | undefined;
+        selectedTags: string[] = [];
+        toggle(tag: string) {
+            const index = this.selectedTags.indexOf(tag);
+            if (index >= 0) {
+            this.selectedTags.splice(index, 1);
+            } else {
+                this.selectedTags.push(tag);
+            }
+        }
+    }
 </script>
 
 <style lang='scss' scoped>
@@ -46,11 +44,13 @@
         justify-content: flex-end;
         padding-left: 10px;
         padding-top: 20px;
+
         > ul {
             display: flex;
             flex-wrap: wrap;
             overflow: auto;
             padding-bottom: 5px;
+
             > li {
                 display: inline-block;
                 $h: 24px;
@@ -60,10 +60,17 @@
                 background-color: #ddd;
                 margin: 3px 10px;
                 padding: 0 16px;
+                &.selected{
+                    background-color: #333;
+                    color: white;
+                }
             }
+
         }
+
         > .new {
             padding: 10px 10px;
+
             > button {
                 border: none;
                 border-bottom: solid 1px;
