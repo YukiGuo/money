@@ -1,8 +1,8 @@
 <template>
     <div>
         <ul class="type">
-            <li @click="change('-')" :class="type==='-'&& 'selected'">支出</li>
-            <li @click="change('+')" :class="type==='+'&& 'selected'">收入</li>
+            <li @click="change('-')" :class="value==='-'&& 'selected'">支出</li>
+            <li @click="change('+')" :class="value==='+'&& 'selected'">收入</li>
         </ul>
     </div>
 </template>
@@ -35,13 +35,12 @@
 
     @Component
     export default class Types extends Vue {
-        type = '-';
+        @Prop(String) readonly value!: string;
         change(type: string) {
             if (type !== '-' && type !== '+') {
                 console.log('错误')
             }
-            this.type = type;
-            console.log(this.type)
+            this.$emit('update:value',type);
         }
     }
 </script>
