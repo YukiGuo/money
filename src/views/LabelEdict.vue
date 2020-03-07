@@ -1,19 +1,12 @@
 <template>
-    
     <div class="wrap">
         <div class="title">
             <router-link to="/label">
-                <span></span>
                 <Icon name="arrowleft"/>
+                <span>编辑标签</span>
             </router-link>
-            <span>编辑标签</span></div>
-        <div class="change"><span>标签名 </span>
-            <label for="label">
-                <input type="text" id ='label' placeholder="请输入标签名" >
-
-            </label>
-
         </div>
+        <FormItem file-name="标签名" placeholder="请输入标签名"/>
     </div>
 </template>
 
@@ -21,9 +14,11 @@
     import Vue from 'vue'
     import {Component} from 'vue-property-decorator';
     import {tagModel} from '@/models/tagModel';
+    import FormItem from '@/components/Money/FormItem.vue';
     tagModel.fetch();
-
-    @Component
+    @Component({
+        components: {FormItem}
+    })
     export default class LabelEdict extends Vue{
         created(){
            const id= this.$route.params.id;
