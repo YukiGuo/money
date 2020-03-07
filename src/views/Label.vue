@@ -8,9 +8,12 @@
                         <Icon name="arrowright"/>
                     </router-link>
                 </div>
-                <div class="createTagWrap">
-                     <button class="createTag" @click="create">新建标签</button>
+                <div class="createWrap">
+                    <Button @click="create" >
+                        新建标签
+                    </Button>
                 </div>
+
             </div>
         </Layout>
 
@@ -20,9 +23,14 @@
 <script lang='ts'>
     import Vue from 'vue';
     import {tagModel} from '@/models/tagModel';
+    import {Component} from 'vue-property-decorator';
+    import Button from '@/components/Button.vue';
 
     const tags =tagModel.fetch();
     console.log(tags);
+    @Component({
+        components: {Button}
+    })
     export default class Label extends Vue{
         tags=tags;
         create(){
@@ -57,19 +65,9 @@
                 }
             }
             }
-
+        > .createWrap{
+      text-align: center;
+            margin-top: 40px;
         }
-        .createTag {
-            height: 40px;
-            border: none;
-            background-color: #bbb;
-            text-align: center;
-            padding: 0 16px;
-            color: #fff;
-            border-radius: 5px;
-           &Wrap{
-               text-align: center;
-               padding-top: 20px;
-           }
-        }
+    }
 </style>
