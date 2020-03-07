@@ -2,7 +2,7 @@
     <div class="tags">
         <ul>
             <li
-                    v-for="tag in data" :key="tag"
+                    v-for="tag in data" :key="tag.id"
                     @click="toggle(tag)"
                     :class="{selected: selectedTags.indexOf(tag)>=0}"
             >
