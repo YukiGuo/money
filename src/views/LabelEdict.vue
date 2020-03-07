@@ -1,12 +1,22 @@
 <template>
     <div class="wrap">
         <div class="title">
-            <router-link to="/label">
+            <router-link to="/label" class="link">
                 <Icon name="arrowleft"/>
-                <span>编辑标签</span>
             </router-link>
+            <span>编辑标签</span>
         </div>
-        <FormItem file-name="标签名" placeholder="请输入标签名"/>
+        <FormItem
+                file-name="标签名"
+                placeholder="请输入标签名"
+                :value="tag.name"
+                @update:value="update"
+        />
+        <div class="tagWrap">
+            <Button @click="remove">
+                删除标签
+            </Button>
+        </div>
     </div>
 </template>
 
@@ -15,21 +25,35 @@
     import {Component} from 'vue-property-decorator';
     import {tagModel} from '@/models/tagModel';
     import FormItem from '@/components/Money/FormItem.vue';
+    import Button from '@/components/Button.vue';
     tagModel.fetch();
     @Component({
-        components: {FormItem}
+        components: {Button, FormItem}
     })
     export default class LabelEdict extends Vue{
+        tag?: { id: string; name: string };
         created(){
            const id= this.$route.params.id;
             const tags=tagModel.data;
-            const tag =tags.filter(item=>(item.id===id));
+            const tag =tags.filter(item=>(item.id===id))[0];
             if(tag){
-              console.log(tag)
+              this.tag=tag;
             }else{
                 this.$router.replace('/404');
             }
-
+        }
+        update(name: string){
+            if(this.tag) {
+                tagModel.update(this.tag.id, name);
+                // alert("修改成功")
+            }
+        }
+        remove(){
+            if(this.tag) {
+                tagModel.remove(this.tag);
+                // alert("删除成功");
+                this.$router.replace('/label');
+            }
 
         }
     }
@@ -39,27 +63,25 @@
     .wrap {
         height: 100vh;
         background-color: #eeeeee;
-        > .title {
+        .title {
             height: 30px;
             display: flex;
-            justify-content: right;
-            align-items: center;
-            padding: 10px 5px;
+            flex-direction: row;
+            padding: 10px 10px;
             background-color: #ffffff;
-            > span {
+            margin-bottom: 5px;
+          .link{
+              color: #333;
+              text-decoration: none;
+          }
+          span {
                 flex-grow: 1;
                 text-align: center;
             }
         }
-        > .change{
-            background-color: #ffffff;
-            margin-top: 10px;
-            padding: 10px;
-            font-size: 14px;
-            > label > input{
-               border: none;
-                padding-left: 10px;
-            }
+        >.tagWrap{
+            margin-top:50px ;
+            text-align: center;
         }
     }
 </style>
