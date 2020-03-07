@@ -30,7 +30,6 @@ const tagModel: TagModel = {
         } else{
             this.data.push({id:id ,name:name});
             this.save();
-            window.localStorage.setItem('_idMax',id);
             return ("成功")
         }
     },
