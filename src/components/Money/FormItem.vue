@@ -2,7 +2,12 @@
 <div>
     <label class=note for="note">
         <span class="name">{{this.fileName}}</span>
-        <input id="note" type="text" :placeholder="this.placeholder" v-model="value">
+        <input id="note"
+               type="text"
+               :placeholder="this.placeholder"
+               :value="value"
+               @input="onValueChange($event.target.value)"
+        >
     </label>
 </div>
 </template>
@@ -12,12 +17,12 @@
     import {Component, Prop, Watch} from 'vue-property-decorator';
     @Component
    export default class FormItem extends Vue{
-       value= '';
+       @Prop({default:''}) value!: string;
        @Prop({required:true}) fileName!: string;
        @Prop(String) placeholder?: string;
        @Watch('value')
-        onValueChange(oldValue: string,newValue: string){
-           this.$emit('update:value',newValue)
+        onValueChange(value: string){
+           this.$emit('update:value',value)
         }
    }
 </script>
