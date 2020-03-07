@@ -4,7 +4,7 @@
         <span class="name">{{this.fileName}}</span>
         <input id="note"
                type="text"
-               :placeholder="this.placeholder"
+               :placeholder="placeholder"
                :value="value"
                @input="onValueChange($event.target.value)"
         >
@@ -20,7 +20,6 @@
        @Prop({default:''}) value!: string;
        @Prop({required:true}) fileName!: string;
        @Prop(String) placeholder?: string;
-       @Watch('value')
         onValueChange(value: string){
            this.$emit('update:value',value)
         }
