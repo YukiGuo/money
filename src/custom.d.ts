@@ -5,3 +5,4 @@ type RecordItem ={
     amount: number;
     createdDate: Date;
 };
+type TagItem= string[];

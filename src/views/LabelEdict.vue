@@ -2,11 +2,15 @@
     
     <div class="wrap">
         <div class="title">
-            <Icon name="arrowleft"/>
+            <router-link to="/label">
+                <span></span>
+                <Icon name="arrowleft"/>
+            </router-link>
             <span>编辑标签</span></div>
         <div class="change"><span>标签名 </span>
             <label for="label">
-                <input type="text" id ='label' placeholder="输入标签名">
+                <input type="text" id ='label' placeholder="请输入标签名" >
+
             </label>
 
         </div>
@@ -14,9 +18,26 @@
 </template>
 
 <script lang='ts'>
-    export default {
-        name: 'LabelChange'
-    };
+    import Vue from 'vue'
+    import {Component} from 'vue-property-decorator';
+    import {tagModel} from '@/models/tagModel';
+    tagModel.fetch();
+
+    @Component
+    export default class LabelEdict extends Vue{
+        created(){
+           const id= this.$route.params.id;
+            const tags=tagModel.data;
+            const tag =tags.filter(item=>(item.id===id));
+            if(tag){
+              console.log(tag)
+            }else{
+                this.$router.replace('/404');
+            }
+
+
+        }
+    }
 </script>
 
 <style lang='scss' scoped>

@@ -42,7 +42,7 @@
 
         ok() {
             this.$emit('update:value',this.output);
-            this.$emit('submit:value', this.output )
+            this.$emit('submit:value', this.output );
             this.output='0'
         }
 

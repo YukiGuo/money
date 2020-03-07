@@ -6,7 +6,7 @@
                     @click="toggle(tag)"
                     :class="{selected: selectedTags.indexOf(tag)>=0}"
             >
-                {{tag}}
+                {{tag.name}}
             </li>
         </ul>
         <div class="new">
@@ -19,6 +19,7 @@
 <script lang='ts'>
     import Vue from 'vue';
     import {Component, Prop} from 'vue-property-decorator';
+    import {tagModel} from '@/models/tagModel';
 
     @Component
     export default class Tags extends Vue {
@@ -35,12 +36,9 @@
         }
         create(){
             const name =window.prompt('请输入标签名');
-            if(name===''){
-                window.alert('标签不能为空~')
-            }else if (this.data) {
-                   this.$emit('update:data',[...this.data,name])
-                }
-
+            if(name){
+                tagModel.create(name)
+            }
         }
     }
 </script>
