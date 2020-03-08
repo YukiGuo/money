@@ -29,8 +29,7 @@
             tags:[''],
             notes:'',
             type:'-',
-            amount:0,
-            createdDate:''
+            amount:0
         };
         onUpdateTags(value: string[]){
             this.record.tags=value;
