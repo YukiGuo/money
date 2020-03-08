@@ -23,14 +23,14 @@ const tagModel: TagModel = {
         window.localStorage.setItem(localStorageKeyName,JSON.stringify(this.data))
     },
     create(name: string ){
-        const id= createId().toString();
         const names=this.data.map(item=>item.name);
         if(names.indexOf(name)>=0){
             return ("重复")
         } else{
-            this.data.push({id:id ,name:name});
+            const id = createId().toString();
+            this.data.push({id, name: name});
             this.save();
-            return ("成功")
+            return ('成功');
         }
     },
    update(id: string,name: string){
