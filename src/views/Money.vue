@@ -17,9 +17,7 @@
     import FormItem from '@/components/Money/FormItem.vue';
     import {Component, Watch} from 'vue-property-decorator';
     import {recordModel} from '@/models/recordModel';
-    import {tagModel} from '@/models/tagModel';
     window.localStorage.setItem('version','0.0.1');
-    recordModel.fetch();tagModel.fetch();
     const recordList= recordModel.fetch();
     @Component({
         components: {FormItem, Types, NumberPad, Tags}

@@ -19,4 +19,8 @@ type TagModel={
 };
 interface Window{
     tagList: Tag[];
+    findTag: (id: string) => Tag;
+    createTag: (name: string) => void;
+    removeTag: (tag: Tag) => void;
+    updateTag: (id: string,name: string) => void;
 }

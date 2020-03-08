@@ -23,10 +23,8 @@
 <script lang='ts'>
     import Vue from 'vue'
     import {Component} from 'vue-property-decorator';
-    import {tagModel} from '@/models/tagModel';
     import FormItem from '@/components/Money/FormItem.vue';
     import Button from '@/components/Button.vue';
-    tagModel.fetch();
     @Component({
         components: {Button, FormItem}
     })
@@ -34,8 +32,7 @@
         tag?: { id: string; name: string };
         created(){
            const id= this.$route.params.id;
-            const tags=tagModel.data;
-            const tag =tags.filter(item=>(item.id===id))[0];
+            const tag=window.findTag(id);
             if(tag){
               this.tag=tag;
             }else{
@@ -44,17 +41,15 @@
         }
         update(name: string){
             if(this.tag) {
-                tagModel.update(this.tag.id, name);
-                // alert("修改成功")
+                window.updateTag(this.tag.id, name);
             }
         }
         remove(){
             if(this.tag) {
-                tagModel.remove(this.tag);
-                // alert("删除成功");
+               window.removeTag(this.tag);
+               alert("删除成功");
                 this.$router.replace('/label');
             }
-
         }
     }
 </script>

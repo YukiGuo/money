@@ -22,11 +22,8 @@
 
 <script lang='ts'>
     import Vue from 'vue';
-    import {tagModel} from '@/models/tagModel';
     import {Component} from 'vue-property-decorator';
     import Button from '@/components/Button.vue';
-
- tagModel.fetch();
     @Component({
         components: {Button}
     })
@@ -34,14 +31,11 @@
         tags=window.tagList;
         create(){
             const name =window.prompt('请输入标签名');
-           if(name){
-               const message =tagModel.create(name);
-               if(message=== "重复"){
-                   alert("标签名重复了")
-               }else if(message==="成功"){
-                   alert("添加成功")
-               }
-           }
+            if(name){
+                window.createTag(name);
+            }else{
+                alert("请输入标签名")
+            }
         }
     }
 </script>
