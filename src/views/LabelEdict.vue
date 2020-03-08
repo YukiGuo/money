@@ -25,6 +25,7 @@
     import {Component} from 'vue-property-decorator';
     import FormItem from '@/components/Money/FormItem.vue';
     import Button from '@/components/Button.vue';
+    import store from '@/store/index2';
     @Component({
         components: {Button, FormItem}
     })
@@ -32,7 +33,7 @@
         tag?: { id: string; name: string };
         created(){
            const id= this.$route.params.id;
-            const tag=window.findTag(id);
+            const tag=store.findTag(id);
             if(tag){
               this.tag=tag;
             }else{
@@ -41,12 +42,12 @@
         }
         update(name: string){
             if(this.tag) {
-                window.updateTag(this.tag.id, name);
+                store.updateTag(this.tag.id, name);
             }
         }
         remove(){
             if(this.tag) {
-               window.removeTag(this.tag);
+                store.removeTag(this.tag);
                alert("删除成功");
                 this.$router.replace('/label');
             }

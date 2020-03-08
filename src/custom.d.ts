@@ -17,12 +17,3 @@ type TagModel={
     update: (id: string,name: string) => "成功"|"重复"|"找不到标签";
     remove: (tag: Tag) => void;
 };
-interface Window {
-    tagList: Tag[];
-    findTag: (id: string) => Tag;
-    createTag: (name: string) => void;
-    removeTag: (tag: Tag) => void;
-    updateTag: (id: string, name: string) => void;
-    recordList: RecordItem[];
-    createRecord: (record: { tags: string[]; notes: string; type: string; amount: number; createdDate: string }) => void;
-}
