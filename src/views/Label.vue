@@ -31,7 +31,7 @@
         components: {Button}
     })
     export default class Label extends Vue{
-        tags=tagModel.data;
+        tags=window.tagList;
         create(){
             const name =window.prompt('请输入标签名');
            if(name){

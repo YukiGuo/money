@@ -19,13 +19,13 @@
     import {recordModel} from '@/models/recordModel';
     import {tagModel} from '@/models/tagModel';
     window.localStorage.setItem('version','0.0.1');
-   const recordList= recordModel.fetch();
-    const tagList=tagModel.fetch();
+    recordModel.fetch();tagModel.fetch();
+    const recordList= recordModel.fetch();
     @Component({
         components: {FormItem, Types, NumberPad, Tags}
     })
     export default class Money extends Vue {
-        tags=tagList;
+        tags=window.tagList;
         recordList: RecordItem[]=recordList;
         record ={
             tags:[''],
