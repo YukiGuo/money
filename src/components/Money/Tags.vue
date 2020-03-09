@@ -2,7 +2,7 @@
     <div class="tags">
         <ul>
             <li
-                    v-for="tag in data" :key="tag.id"
+                    v-for="tag in tagList" :key="tag.id"
                     @click="toggle(tag)"
                     :class="{selected: selectedTags.indexOf(tag)>=0}"
             >
@@ -18,12 +18,12 @@
 
 <script lang='ts'>
     import Vue from 'vue';
-    import {Component, Prop} from 'vue-property-decorator';
+    import {Component} from 'vue-property-decorator';
     import store from '@/store/index2';
 
     @Component
     export default class Tags extends Vue {
-        @Prop() data: string[] | undefined;
+       tagList =store.fetchTags();
         selectedTags: string[] = [];
         toggle(tag: string) {
             const index = this.selectedTags.indexOf(tag);
