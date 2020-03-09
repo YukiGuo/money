@@ -1,6 +1,5 @@
 <template>
     <div>
-        {{recordList}}
         <Layout class-prefix="xxx">
             <Tags   @update:value="onUpdateTags" />
             <FormItem @update:value="onUpdateNotes" file-name="备注" placeholder="请填写备注"/>
@@ -18,13 +17,15 @@
     import FormItem from '@/components/Money/FormItem.vue';
     import {Component} from 'vue-property-decorator';
     import store2 from '@/store/index2.ts';
+
     window.localStorage.setItem('version','0.0.1');
     @Component({
         components: {FormItem, Types, NumberPad, Tags}
     })
     export default class Money extends Vue {
+        // Declared as computed property setter
         tags=store2.tagList;
-        recordList: RecordItem[]=store2.recordList;
+        recordList: RecordItem[]=this.$store.state.recordList;
         record ={
             tags:[''],
             notes:'',
@@ -45,6 +46,7 @@
         }
         saveRecordList(){
             store2.createRecord(this.record);
+            this.$store.commit('createRecord',this.record)
         }
     }
 </script>
