@@ -3,7 +3,7 @@
         <Layout>
             <div class="wrap">
                 <div class="labels">
-                    <router-link class='tagWrap' :to=" `/label/edict/${tag.id}`" v-for="tag in tags" :key=tag.id >
+                    <router-link class='tagWrap' :to=" `/label/edict/${tag.id}`" v-for="tag in tagList" :key=tag.id >
                            <span>{{tag.name}}</span>
                         <Icon name="arrowright"/>
                     </router-link>
@@ -24,16 +24,20 @@
     import Vue from 'vue';
     import {Component} from 'vue-property-decorator';
     import Button from '@/components/Button.vue';
-    import store from '@/store/index2';
     @Component({
         components: {Button}
     })
     export default class Label extends Vue{
-        tags=store.tagList;
+        get tagList(){
+          return  this.$store.state.tagList;
+        }
+        created(){
+            this.$store.commit('fetchTags')
+        }
         create(){
             const name =window.prompt('请输入标签名');
             if(name){
-                store.createTag(name);
+                this.$store.commit('createTag',name);
             }else{
                 alert("请输入标签名")
             }

@@ -19,11 +19,14 @@
 <script lang='ts'>
     import Vue from 'vue';
     import {Component} from 'vue-property-decorator';
-    import store from '@/store/index2';
-
     @Component
     export default class Tags extends Vue {
-       tagList =store.fetchTags();
+        get tagList() {
+            return this.$store.state.tagList;
+        }
+        created(){
+            this.$store.commit('fetchTags')
+        }
         selectedTags: string[] = [];
         toggle(tag: string) {
             const index = this.selectedTags.indexOf(tag);
@@ -37,7 +40,7 @@
         create(){
             const name =window.prompt('请输入标签名');
             if(name){
-                store.createTag(name)
+                this.$store.commit('createTag',name);
             }
         }
     }

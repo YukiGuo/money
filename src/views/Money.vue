@@ -16,7 +16,7 @@
     import Types from '@/components/Money/Types.vue';
     import FormItem from '@/components/Money/FormItem.vue';
     import {Component} from 'vue-property-decorator';
-    import store2 from '@/store/index2.ts';
+    //import store2 from '@/store/index2.ts';
 
     window.localStorage.setItem('version','0.0.1');
     @Component({
@@ -24,7 +24,7 @@
     })
     export default class Money extends Vue {
         // Declared as computed property setter
-        tags=store2.tagList;
+        tags=this.$store.state.tagList;
         recordList: RecordItem[]=this.$store.state.recordList;
         record ={
             tags:[''],
@@ -45,7 +45,6 @@
             this.record.notes=value;
         }
         saveRecordList(){
-            store2.createRecord(this.record);
             this.$store.commit('createRecord',this.record)
         }
     }
