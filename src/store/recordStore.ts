@@ -11,7 +11,7 @@ const recordStore={
     },
     createRecord(record: RecordItem) {
         const copy=clone(record);
-        copy.createdDate=new Date();
+        copy.createdDate=new Date().toISOString();
         this.recordList?.push(copy);
         recordStore.saveRecords();
     }
