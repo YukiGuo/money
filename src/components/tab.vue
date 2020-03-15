@@ -2,6 +2,7 @@
     <ul class="tab">
         <li
                 v-for="item in list" :key="item.value"
+                class="tab-item"
                 :class="isClass(item)"
                 @click="select(item)"
         >
@@ -46,14 +47,14 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
-         li {
+         &-item{
             position: relative;
             height: 64px;
             width: 50vw;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #bbb;
+            background: #c4c4c4;
             font-size: 24px;
             &.selected::after {
                 content: '';
@@ -62,7 +63,7 @@
                 left: 0;
                 width: 100%;
                 height: 4px;
-                background: #8a8a8a;
+                background: #333333;
             }
         }
     }

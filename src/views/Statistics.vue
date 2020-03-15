@@ -33,5 +33,7 @@
             }
         }
     }
-
+    ::v-deep .interval-tab-item{
+        height: 48px;
+    }
 </style>
