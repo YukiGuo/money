@@ -9,7 +9,9 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "Vue": "latest",
     "core-js": "^3.6.4",
+    "dayjs": "^1.8.22",
     "global": "^4.4.0",
     "register-service-worker": "^1.6.2",
     "svg-sprite-loader": "^4.2.1",
@@ -19,8 +21,7 @@
     "vue-class-component": "^7.2.2",
     "vue-property-decorator": "^8.3.0",
     "vue-router": "^3.1.5",
-    "vuex": "^3.1.2",
-    "Vue": "latest"
+    "vuex": "^3.1.2"
   },
   "devDependencies": {
     "@types/jest": "^24.0.19",

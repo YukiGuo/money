@@ -5,7 +5,7 @@
             <Tab :list="intervalList" :value.sync="interval" class-prefix="interval"/>
             <ul class="record">
                 <li v-for="(group,index) in result" :key="index">
-                    <h3 class="title"> {{group.title}}</h3>
+                    <h3 class="title"> {{ beautify(group.title)}}</h3>
                     <ol>
                         <li v-for="(item,index) in group.items" :key="index">
                             <span class="tag">{{item.tags[0].name}}</span>
@@ -67,6 +67,7 @@
     import Tab from '@/components/Tab.vue';
     import typeList from '@/constants/typelist';
     import intervalList from '@/constants/intervalList';
+    import dayjs from 'dayjs';
 
     @Component({
         components: {Tab}
@@ -90,16 +91,40 @@
             for (let i = 0; i < recordList.length; i++) {
                 const [date, time] = recordList[i].createdDate!.split('T');
                 hashTable[date] = hashTable[date] || {title: date, items: []};
-                console.log(date);
                 hashTable[date].items.push(recordList[i]);
-
             }
-            console.log(hashTable);
             return hashTable;
         }
-
+      beautify(string: string){
+          // const d =new Date(Date.parse(string));
+          // const y= d.getFullYear();
+          // const  m =d.getMonth();
+          // const dd =d.getDay();
+          const day=dayjs(string);
+          const today=new Date();
+          const oneday =86400*1000;
+          // if(y===today.getFullYear() && m===today.getMonth() && dd===today.getDay())
+          if(day.isSame(today,'day'))//day简化
+          {return "今天"}else if(
+            day.isSame(today.valueOf()-oneday,'day')
+          ){
+              return "昨天"
+          }else if(
+            day.isSame(dayjs().subtract(2,'day'),'day')
+          ){
+              return "前天"
+          }else{
+              if(day.isSame(today,'year')) {
+                  return day.format("M月D日")
+              }else{
+                  return day.format("YYYY年M月D日")
+              }
+          }
+      }
         mounted() {
             this.$store.commit('fetchRecords');
+            const api= dayjs();
+            console.log(api);
         }
 
     }
