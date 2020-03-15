@@ -1,8 +1,8 @@
 <template>
     <div>
         <Layout>
-            <Tab :list="arr" :value.sync="type" class-prefix="type"/>
-            <Tab :list ="arr1" :value.sync="interval" class-prefix="interval"/>
+            <Tab :list="typeList" :value.sync="type" class-prefix="type"/>
+            <Tab :list ="intervalList" :value.sync="interval" class-prefix="interval"/>
        </Layout>
     </div>
 </template>
@@ -11,14 +11,16 @@
     import Vue from 'vue'
     import {Component} from 'vue-property-decorator';
     import Tab from '@/components/Tab.vue';
+    import typeList from '@/constants/typelist';
+    import intervalList from '@/constants/intervalList';
     @Component({
         components: {Tab}
     })
     export default class Statistics extends Vue{
         type='-';
         interval='day';
-        arr=[{value: '-',text: "支出"},{value:'+',text:"收入"}];
-        arr1=[{value:'day',text:"按天"},{value: 'week',text: "按周"},{value: "month",text:"按月"}]
+        typeList=typeList;
+        intervalList= intervalList
     }
 </script>
 <style lang='scss' scoped>
