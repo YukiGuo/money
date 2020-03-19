@@ -19,13 +19,14 @@
 
 <script lang='ts'>
     import Vue from 'vue';
-    import {Component} from 'vue-property-decorator';
+    import {Component, Prop} from 'vue-property-decorator';
     import tagArray from '@/constants/tagArray';
     @Component
     export default class Tags extends Vue {
+        @Prop({required: true}) type!: string;
         get tagList() {
             // return  this.$store.state.tagList;
-            return tagArray;
+            return tagArray.filter(item => item.type === this.type);
         }
         created(){
             this.$store.commit('fetchTags')
@@ -56,9 +57,8 @@
         font-size: 14px;
         display: flex;
         flex-direction: column;
-        justify-content: flex-end;
-        padding-left: 10px;
-        padding-top: 20px;
+        justify-content: flex-start;
+        padding-top: 10px;
         background: white;
 
         > ul {
@@ -67,13 +67,14 @@
             padding-bottom: 5px;
 
             > li {
+                width: 15vw;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                margin: 3px 10px;
-                padding: 0 16px;
-                font-size: 12px;
+                margin-left: 4vw;
+                margin-top: 5px;
+                font-size: 13px;
 
                 > .icon {
                     display: flex;
