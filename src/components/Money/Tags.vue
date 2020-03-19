@@ -6,23 +6,26 @@
                     @click="toggle(tag)"
                     :class="{selected: selectedTags.indexOf(tag)>=0}"
             >
-                {{tag.name}}
+                <Icon :name="tag.icon" class="icon"/>
+                <span>{{tag.name}}</span>
+            </li>
+            <li @click="create">
+                <Icon name="add" class="icon"/>
+                <span>添加</span>
             </li>
         </ul>
-        <div class="new">
-            <button @click="create">新增标签</button>
-        </div>
-
     </div>
 </template>
 
 <script lang='ts'>
     import Vue from 'vue';
     import {Component} from 'vue-property-decorator';
+    import tagArray from '@/constants/tagArray';
     @Component
     export default class Tags extends Vue {
         get tagList() {
-            return this.$store.state.tagList;
+            // return  this.$store.state.tagList;
+            return tagArray;
         }
         created(){
             this.$store.commit('fetchTags')
@@ -47,6 +50,7 @@
 </script>
 
 <style lang='scss' scoped>
+    @import '@/assets/style/variable.scss';
     .tags {
         flex-grow: 1;
         font-size: 14px;
@@ -55,25 +59,39 @@
         justify-content: flex-end;
         padding-left: 10px;
         padding-top: 20px;
+        background: white;
 
         > ul {
             display: flex;
             flex-wrap: wrap;
-            overflow: auto;
             padding-bottom: 5px;
 
             > li {
-                display: inline-block;
-                $h: 24px;
-                height: $h;
-                line-height: $h;
-                border-radius: $h/2;
-                background-color: #ddd;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
                 margin: 3px 10px;
                 padding: 0 16px;
-                &.selected{
-                    background-color: #333;
-                    color: white;
+                font-size: 12px;
+
+                > .icon {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 25px;
+                    width: 25px;
+                    background: #F0F0F0;
+                    border-radius: 50px;
+                    color: #8C9098;
+                    margin-bottom: 8px;
+                }
+
+                &.selected {
+                    .icon {
+                        color: white;
+                        background: $blueColor;
+                    }
                 }
             }
 
