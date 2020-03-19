@@ -2,20 +2,20 @@
     <div class="numberPad">
         <div class="output">{{output}}</div>
         <div class="buttons">
-            <button @click="inputContent">1</button>
-            <button @click="inputContent">2</button>
-            <button @click="inputContent">3</button>
+            <button @click="inputContent" class="border-1px-left">1</button>
+            <button @click="inputContent" class="border-1px-left">2</button>
+            <button @click="inputContent" class="border-1px-left">3</button>
             <button @click="remove">删除</button>
-            <button @click="inputContent">4</button>
-            <button @click="inputContent">5</button>
-            <button @click="inputContent">6</button>
-            <button @click="clear">清空</button>
-            <button @click="inputContent">7</button>
-            <button @click="inputContent">8</button>
-            <button @click="inputContent">9</button>
-            <button @click="ok" class="ok">OK</button>
-            <button @click="inputContent" class="zero">0</button>
-            <button @click="inputContent">.</button>
+            <button @click="inputContent" class="border-1px-top border-1px-left">4</button>
+            <button @click="inputContent" class="border-1px-top border-1px-left">5</button>
+            <button @click="inputContent" class="border-1px-top border-1px-left">6</button>
+            <button @click="clear" class="border-1px-top">清空</button>
+            <button @click="inputContent" class="border-1px-top border-1px-left">7</button>
+            <button @click="inputContent" class="border-1px-top border-1px-left">8</button>
+            <button @click="inputContent" class="border-1px-top border-1px-left">9</button>
+            <button @click="ok" class="ok border-1px-top">OK</button>
+            <button @click="inputContent" class="zero border-1px-top border-1px-left">0</button>
+            <button @click="inputContent" class="border-1px-top border-1px-left">.</button>
         </div>
     </div>
 </template>
@@ -75,27 +75,53 @@
     @import '~@/assets/style/variable.scss';
 
     .numberPad {
+        .border-1px-top::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 200%;
+            height: 1px;
+            background: #ccc;
+            transform: scale(0.5);
+            transform-origin: left top;
+        }
+
+        .border-1px-left::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 1px;
+            height: 200%;
+            background: #ccc;
+            transform: scale(0.5);
+            transform-origin: left top;
+        }
+
         > .output {
-            @extend %innerShadow;
             font-size: 36px;
             padding: 9px 16px;
             font-family: Consolas, monospace;
             text-align: right;
-
         }
 
         > .buttons {
             @extend %x;
 
             > button {
+                position: relative;
                 float: left;
                 width: 25%;
-                height: 64px;
-                background-color: transparent;
-                border: 0.5px solid #ccc;
+                height: 50px;
+                background-color: white;
+                border: none;
+                font-size: 18px;
 
                 &.ok {
-                    height: 128px;
+                    height: 100px;
                     float: right;
                 }
 
