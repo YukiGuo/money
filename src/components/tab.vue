@@ -41,30 +41,33 @@
 
 <style lang='scss' scoped>
     @import '~@/assets/style/variable.scss';
-
     .tab {
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-         &-item{
-            position: relative;
-            height: 64px;
-            width: 50vw;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #c4c4c4;
-            font-size: 24px;
-            &.selected::after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                height: 4px;
-                background: #333333;
-            }
-        }
+         .tab-item {
+             position: relative;
+             height: 64px;
+             width: 50vw;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             font-size: 18px;
+
+             &.selected {
+                 font-weight: bold;
+             }
+
+             &.selected::after {
+                 content: '';
+                 position: absolute;
+                 bottom: 0;
+                 left: 0;
+                 width: 100%;
+                 height: 3px;
+                 background: $blueColor;
+             }
+         }
     }
 </style>
