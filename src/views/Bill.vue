@@ -4,15 +4,33 @@
             <div class="record">
                 <div class="nav">
                     <h3>我的账单</h3>
-                    <div class="month">
-                      {{day}}
+                    <div class="date">
+                        <label>
+                            <select class="year" v-model="selectedYear">
+                                <option class="yearItem"
+                                        v-for="(year,index) in yearList" :key="index"
+                                >
+                                    {{year}}
+                                </option>
+                            </select>年
+                        </label>
+                        <label>
+                            <select v-model="selectedMonth">
+                                <option class="monthItem"
+                                        :value="month" v-for="(month,index) in monthList" :key="index"
+                                >
+                                    {{month}}
+                                </option>
+                            </select>月
+                        </label>
                     </div>
                     <div class="type">
-                        <span>支出 ￥3000</span>
-                        <span>收入￥7000</span>
+                        <span>{{selectedMonth}}月</span>
+                        <span>支出：</span><span>{{total('-').toFixed(2)}}</span>
+                        <span>收入：</span><span>{{total('+').toFixed(2)}}</span>
                     </div>
                 </div>
-                <div v-for="(group,index) in list" :key="index" class="recordItem">
+                <div v-for="(group,index) in showList" :key="index" class="recordItem">
                     <div class="title">
                         <span> {{ beautify(group.title)}}</span>
                         <span>￥{{group.total.toFixed(2)}}</span>
@@ -42,29 +60,36 @@
 <script lang='ts'>
     import Vue from 'vue';
     import {Component} from 'vue-property-decorator';
-    import Tab from '@/components/Tab.vue';
     import dayjs from 'dayjs';
     import clone from '@/lib/clone';
-   const date= dayjs();
-   console.log(date);
-    @Component({
-        components: {Tab}
-    })
+    import dateList from '@/constants/dateList';
+
+    @Component
     export default class Statistics extends Vue {
         type = '-';
-        day=date.format("YYYY-M");
-        month= dayjs().month();
-        year=date.year();
+        time = new Date();
+        selectedYear: number = dayjs().year();
+        selectedMonth: number = dayjs().month() + 1;
+        monthList: number[] = dateList.month;
+        yearList: number[] = dateList.year;
         get recordList() {
             return (this.$store.state as RootState).recordList;
         }
-
-        get list() {
+        get selectedList(){
+            console.log(dayjs(this.recordList[0].createdDate).year());
+            console.log(dayjs(this.recordList[0].createdDate).month());
+            console.log(dayjs(this.recordList[1].createdDate).year());
+            console.log(dayjs(this.recordList[1].createdDate).month());
+           const a= this.recordList.filter(t => dayjs(t.createdDate).year() === this.selectedYear)
+                    .filter(t => dayjs(t.createdDate).month() === this.selectedMonth - 1);
+            return a
+        }
+        get showList() {
             const {recordList} = this;
             if (recordList.length === 0) {
                 return [] as GroupList;
             }
-            const newList = clone(recordList)
+            const newList = clone(this.selectedList)
                 .sort((a, b) => dayjs(b.createdDate).valueOf() - dayjs(a.createdDate).valueOf());
             if (newList.length === 0) {
                 return [] as GroupList;
@@ -86,13 +111,13 @@
             }
             groupList.map(group => {
                 group.total = group.items.reduce((sum, item) => {
-                    if(item.type==='-'){
-                        return sum - item.amount
-                    }else {
-                        return sum + item.amount
+                    if (item.type === '-') {
+                        return sum - item.amount;
+                    } else {
+                        return sum + item.amount;
                     }
-                    }, 0);
-            })
+                }, 0);
+            });
             return groupList;
 
         }
@@ -126,9 +151,13 @@
             }
         }
 
-        mounted() {
+        total(type: string) {
+            const typeList = this.selectedList.filter(t => t.type === type);
+            return typeList.reduce((sum, item) => {return sum + item.amount;}, 0);
+        }
+
+        beforeCreate() {
             this.$store.commit('fetchRecords');
-            const api = dayjs();
         }
     }
 </script>
@@ -146,25 +175,37 @@
             }
         }
     }
+
     .record {
-        .nav{
+        .nav {
             font-size: 20px;
-            padding:10px 16px;
+            padding: 10px 16px;
             border-bottom: white 4px solid;
-            >.month{
+
+            > .date {
                 font-size: 18px;
                 font-weight: 500;
                 padding: 10px 0;
+
+                select {
+                    border: none;
+                    background-color: inherit;
+                }
             }
-            >.type{
-                font-size: 14px;
+
+            > .type {
+                font-size: 18px;
                 color: #444444;
                 font-weight: 600;
+                >span{
+                    margin-right: 6px;
+                }
             }
         }
 
         > .recordItem {
             padding: 0 16px;
+
             > .title {
                 display: flex;
                 justify-content: space-between;
@@ -173,16 +214,18 @@
                 font-size: 18px;
                 padding: 0 8px;
             }
-            >.item {
+
+            > .item {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 background: white;
                 margin-bottom: 2px;
                 padding: 8px;
+
                 > .logo {
                     font-size: 20px;
-                    color:  #DF3A01;
+                    color: #DF3A01;
                 }
 
                 > .tag {
@@ -190,6 +233,7 @@
                     margin-left: 15px;
                     display: flex;
                     flex-direction: column;
+
                     > .note {
                         font-size: 14px;
                         color: #c6c6c6;
@@ -197,20 +241,23 @@
                         height: 16px;
                     }
                 }
+
                 > .money {
                     display: flex;
                     flex-direction: column;
                     font-size: 18px;
                     font-weight: 600;
-                    color:  #DF3A01;
+                    color: #DF3A01;
                 }
             }
-            .income{
-                >.logo{
-                    color:	#2E8B57;
+
+            .income {
+                > .logo {
+                    color: #2E8B57;
                 }
-                >.money{
-                    color:#2E8B57;
+
+                > .money {
+                    color: #2E8B57;
                 }
             }
         }
