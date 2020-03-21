@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Statistics from '@/views/Statistics.vue';
+import Bill from '@/views/Bill.vue';
 import Label from '@/views/Label.vue';
 import Money from '@/views/Money.vue';
 import Notfound from '@/views/Notfound.vue';
@@ -19,7 +19,7 @@ const routes = [
     },
     {
         path:'/statistics',
-        component: Statistics
+        component: Bill
     },
     {
         path:'/label',

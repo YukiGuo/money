@@ -65,7 +65,7 @@
     import dateList from '@/constants/dateList';
 
     @Component
-    export default class Statistics extends Vue {
+    export default class Bill extends Vue {
         type = '-';
         time = new Date();
         selectedYear: number = dayjs().year();
