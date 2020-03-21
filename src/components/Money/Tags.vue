@@ -51,7 +51,7 @@
 </script>
 
 <style lang='scss' scoped>
-    @import '@/assets/style/variable.scss';
+    @import '~@/assets/style/variable.scss';
     .tags {
         flex-grow: 1;
         font-size: 14px;

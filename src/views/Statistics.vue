@@ -1,103 +1,72 @@
 <template>
-    <div>
+    <div class="wrap">
         <Layout>
-            <Tab :list="typeList" :value.sync="type" class-prefix="type"/>
-            <Tab :list="intervalList" :value.sync="interval" class-prefix="interval"/>
-            <ul class="record">
-                <li v-for="(group,index) in list" :key="index">
-                    <div class="title">
-                    <span> {{ beautify(group.title)}}</span>
-                        <span>￥{{group.total}}</span>
+            <div class="record">
+                <div class="nav">
+                    <h3>我的账单</h3>
+                    <div class="month">
+                      {{day}}
                     </div>
-                    <ol>
-                        <li v-for="(item,index) in group.items" :key="index">
-                            <span class="tag">{{item.tags[0].name}}</span>
-                            <span class="notes">{{item.notes}}</span>
-                            <span class="money">￥{{item.amount}}</span>
-                        </li>
-                    </ol>
-                </li>
-            </ul>
+                    <div class="type">
+                        <span>支出 ￥3000</span>
+                        <span>收入￥7000</span>
+                    </div>
+                </div>
+                <div v-for="(group,index) in list" :key="index" class="recordItem">
+                    <div class="title">
+                        <span> {{ beautify(group.title)}}</span>
+                        <span>￥{{group.total.toFixed(2)}}</span>
+                    </div>
+                    <div
+                            v-for="(item,index) in group.items" :key="index"
+                            class="item"
+                            :class="{income:item.type==='+'}"
+                    >
+                        <Icon class="logo" :name="item.tags[0].icon"/>
+                        <span class="tag">
+                               <span>{{item.tags[0].name}}</span>
+                              <span
+                                      class="note"
+                              >{{item.notes}}</span>
+                            </span>
+                        <span class="money">
+                                <span>{{item.type}} {{item.amount}}</span>
+                            </span>
+                    </div>
+                </div>
+            </div>
         </Layout>
     </div>
 </template>
-<style lang='scss' scoped>
-    ::v-deep .type-tab-item {
-        background: white;
 
-        &.selected {
-            background-color: #c4c4c4;
-
-            &::after {
-                display: none;
-            }
-        }
-    }
-
-    ::v-deep .interval-tab-item {
-        height: 48px;
-    }
-
-    .record {
-        > li {
-
-            > .title {
-                display: flex;
-                justify-content: space-between;
-                line-height: 40px;
-                padding: 0 10px;
-            }
-
-            > ol {
-                > li {
-                    background: white;
-                    min-height: 35px;
-                    margin-bottom: 2px;
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 0 10px;
-
-                    > .notes {
-                        margin-right: auto;
-                        margin-left: 8px;
-                    }
-                }
-            }
-        }
-    }
-</style>
 <script lang='ts'>
     import Vue from 'vue';
     import {Component} from 'vue-property-decorator';
     import Tab from '@/components/Tab.vue';
-    import typeList from '@/constants/typelist';
-    import intervalList from '@/constants/intervalList';
     import dayjs from 'dayjs';
     import clone from '@/lib/clone';
-
+   const date= dayjs();
+   console.log(date);
     @Component({
         components: {Tab}
     })
     export default class Statistics extends Vue {
         type = '-';
-        interval = 'day';
-        typeList = typeList;
-        intervalList = intervalList;
-
+        day=date.format("YYYY-M");
+        month= dayjs().month();
+        year=date.year();
         get recordList() {
             return (this.$store.state as RootState).recordList;
         }
+
         get list() {
             const {recordList} = this;
             if (recordList.length === 0) {
                 return [] as GroupList;
             }
             const newList = clone(recordList)
-                .filter(item=>item.type===this.type)
                 .sort((a, b) => dayjs(b.createdDate).valueOf() - dayjs(a.createdDate).valueOf());
-            if(newList.length===0){
+            if (newList.length === 0) {
                 return [] as GroupList;
             }
             type GroupList = { title: string; items: RecordItem[]; total?: number }[];
@@ -117,9 +86,13 @@
             }
             groupList.map(group => {
                 group.total = group.items.reduce((sum, item) => {
-                    return (sum + item.amount);
-                },0);
-            });
+                    if(item.type==='-'){
+                        return sum - item.amount
+                    }else {
+                        return sum + item.amount
+                    }
+                    }, 0);
+            })
             return groupList;
 
         }
@@ -157,6 +130,89 @@
             this.$store.commit('fetchRecords');
             const api = dayjs();
         }
-
     }
 </script>
+<style lang='scss' scoped>
+    ::v-deep .type-tab-item {
+        background: white;
+        font-size: 16px;
+        height: 30px;
+
+        &.selected {
+            background-color: #c4c4c4;
+
+            &::after {
+                display: none;
+            }
+        }
+    }
+    .record {
+        .nav{
+            font-size: 20px;
+            padding:10px 16px;
+            border-bottom: white 4px solid;
+            >.month{
+                font-size: 18px;
+                font-weight: 500;
+                padding: 10px 0;
+            }
+            >.type{
+                font-size: 14px;
+                color: #444444;
+                font-weight: 600;
+            }
+        }
+
+        > .recordItem {
+            padding: 0 16px;
+            > .title {
+                display: flex;
+                justify-content: space-between;
+                line-height: 40px;
+                font-weight: bold;
+                font-size: 18px;
+                padding: 0 8px;
+            }
+            >.item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background: white;
+                margin-bottom: 2px;
+                padding: 8px;
+                > .logo {
+                    font-size: 20px;
+                    color:  #DF3A01;
+                }
+
+                > .tag {
+                    margin-right: auto;
+                    margin-left: 15px;
+                    display: flex;
+                    flex-direction: column;
+                    > .note {
+                        font-size: 14px;
+                        color: #c6c6c6;
+                        line-height: 16px;
+                        height: 16px;
+                    }
+                }
+                > .money {
+                    display: flex;
+                    flex-direction: column;
+                    font-size: 18px;
+                    font-weight: 600;
+                    color:  #DF3A01;
+                }
+            }
+            .income{
+                >.logo{
+                    color:	#2E8B57;
+                }
+                >.money{
+                    color:#2E8B57;
+                }
+            }
+        }
+    }
+</style>

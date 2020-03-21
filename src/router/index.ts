@@ -5,6 +5,7 @@ import Label from '@/views/Label.vue';
 import Money from '@/views/Money.vue';
 import Notfound from '@/views/Notfound.vue';
 import LabelEdict from '@/views/LabelEdict.vue';
+import Bill from '@/views/Bill.vue';
 Vue.use(VueRouter);
 
 const routes = [
