@@ -4,7 +4,7 @@
             <li
                     v-for="tag in tagList" :key="tag.id"
                     @click="toggle(tag)"
-                    :class="{selected: selectedTags.indexOf(tag)>=0}"
+                    :class="{selected: tag===selectedTag}"
             >
                 <Icon :name="tag.icon" class="icon"/>
                 <span>{{tag.name}}</span>
@@ -31,15 +31,11 @@
         created(){
             this.$store.commit('fetchTags')
         }
-        selectedTags: string[] = [];
-        toggle(tag: string) {
-            const index = this.selectedTags.indexOf(tag);
-            if (index >= 0) {
-            this.selectedTags.splice(index, 1);
-            } else {
-                this.selectedTags.push(tag);
-            }
-            this.$emit('update:value',this.selectedTags)
+        selectedTag: Tag= {} ;
+        toggle(tag: Tag) {
+                this.selectedTag=tag;
+                this.$emit('update:value',this.selectedTag);
+            console.log(this.selectedTag)
         }
         create(){
             const name =window.prompt('请输入标签名');

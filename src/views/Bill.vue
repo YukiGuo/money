@@ -40,9 +40,9 @@
                             class="item"
                             :class="{income:item.type==='+'}"
                     >
-                        <Icon class="logo" :name="item.tags[0].icon"/>
+                        <Icon class="logo" :name="item.tag.icon"/>
                         <span class="tag">
-                               <span>{{item.tags[0].name}}</span>
+                               <span>{{item.tag.name}}</span>
                               <span
                                       class="note"
                               >{{item.notes}}</span>

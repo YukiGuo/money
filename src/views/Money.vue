@@ -2,7 +2,7 @@
     <div>
         <Layout class-prefix="xxx">
             <Tab :list="typeList" :value.sync="record.type"/>
-            <Tags @update:value="onUpdateTags" :type="record.type"/>
+            <Tags @update:value="onUpdateTag" :type="record.type"/>
             <FormItem @update:value="onUpdateNotes" file-name="备注" placeholder="请填写备注"/>
             <NumberPad @update:value="onUpdateAmount" @submit:value="saveRecordList"/>
         </Layout>
@@ -18,7 +18,6 @@
     import Tab from '@/components/Tab.vue';
     import typeList from '@/constants/typelist';
     //import store2 from '@/store/index2.ts';
-
     window.localStorage.setItem('version','0.0.1');
     @Component({
         components: {Tab, FormItem, NumberPad, Tags}
@@ -29,13 +28,13 @@
         recordList: RecordItem[]=this.$store.state.recordList;
         typeList=typeList;
         record ={
-            tags:[''],
+            tag:{},
             notes:'',
             type:'-',
             amount:0
         };
-        onUpdateTags(value: string[]){
-            this.record.tags=value;
+        onUpdateTag(value: string[]){
+            this.record.tag=value;
         }
         onUpdateType(value: string){
             this.record.type=value;

@@ -1,10 +1,3 @@
-type Tag = {
-    id: number;
-    name: string;
-    icon: string;
-    type: string;
-}
-
 const tagArray: Tag[] = [
     {id: 1, name: '餐饮', icon: 'canyin', type: '-'},
     {id: 2, name: '购物', icon: 'gouwuche', type: '-'},

@@ -5,59 +5,6 @@ import createId from '@/lib/createId';
 import router from '@/router';
 
 Vue.use(Vuex);
-
-const arr = [
-    [{
-        'tags': [{'id': '1', 'name': '衣服'}],
-        'notes': '',
-        'type': '-',
-        'amount': 100,
-        'createdDate': '2020-03-19T10:01:25.239Z'
-    }, {
-        'tags': [{'id': '2', 'name': '住宿'}],
-        'notes': '',
-        'type': '-',
-        'amount': 800,
-        'createdDate': '2020-03-19T10:01:31.753Z'
-    }, {
-        'tags': [{'id': '5', 'name': '三餐'}],
-        'notes': '',
-        'type': '-',
-        'amount': 80,
-        'createdDate': '2020-03-19T10:01:35.582Z'
-    }, {
-        'tags': [{'id': '5', 'name': '三餐'}],
-        'notes': '',
-        'type': '-',
-        'amount': 30,
-        'createdDate': '2020-03-19T10:01:38.219Z'
-    }, {
-        'tags': [{'id': '5', 'name': '三餐'}],
-        'notes': '',
-        'type': '-',
-        'amount': 40,
-        'createdDate': '2020-03-19T10:01:40.729Z'
-    }, {
-        'tags': [{'id': '5', 'name': '三餐'}],
-        'notes': '',
-        'type': '-',
-        'amount': 20,
-        'createdDate': '2020-03-19T10:01:42.267Z'
-    }, {
-        'tags': [{'id': '4', 'name': '护肤'}],
-        'notes': '',
-        'type': '-',
-        'amount': 500,
-        'createdDate': '2020-03-19T10:01:47.083Z'
-    }, {
-        'tags': [{'id': '3', 'name': '旅游'}],
-        'notes': '',
-        'type': '-',
-        'amount': 3000,
-        'createdDate': '2020-03-19T10:01:52.008Z'
-    }]
-];
-
 const store = new Vuex.Store({
     state: {
         recordList: [],

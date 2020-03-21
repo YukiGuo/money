@@ -1,14 +1,16 @@
 type RecordItem ={
-    tags: string[];
+    tag: Tag;
     notes: string;
     type: string;
     amount: number;
     createdDate?: string;
 };
-type Tag={
-    id: string;
+type Tag = {
+    id: number;
     name: string;
-};
+    icon: string;
+    type: string;
+}
 type TagModel={
     data: Tag[];
     fetch: () => Tag[];
