@@ -37,7 +37,7 @@ nav{
         color: #333;
     }
     > .item.selected{
-        color: $blueColor;
+        color: $colorBlue;
     }
 }
 </style>

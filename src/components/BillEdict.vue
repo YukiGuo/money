@@ -42,7 +42,7 @@
 
         > .nav {
             padding: 16px 10px;
-            background: $blueColor;
+            background: $colorBlue;
             display: flex;
             align-items: center;
             color: white;

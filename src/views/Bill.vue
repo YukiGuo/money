@@ -158,6 +158,7 @@
     }
 </script>
 <style lang='scss' scoped>
+    @import '../assets/style/variable.scss';
     ::v-deep .type-tab-item {
         background: white;
         font-size: 16px;
@@ -243,17 +244,16 @@
                     flex-direction: column;
                     font-size: 18px;
                     font-weight: 600;
-                    color: #DF3A01;
+                    color: $colorRed;
                 }
             }
 
             .income {
                 > .logo {
-                    color: #2E8B57;
+                    color: $colorGreen;
                 }
-
                 > .money {
-                    color: #2E8B57;
+                    color: $colorGreen;
                 }
             }
         }

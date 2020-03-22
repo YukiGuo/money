@@ -43,10 +43,10 @@
         margin-bottom: 1px;
         >button{
             background: transparent;
-            border: solid #DF3A01 1px;
+            border: solid $colorRed 1px;
             padding: 2px 6px;
             font-size: 14px;
-            color: #DF3A01;
+            color: $colorRed;
         }
     }
 

@@ -94,7 +94,7 @@
                 &.selected {
                     .icon {
                         color: white;
-                        background: $blueColor;
+                        background: $colorBlue;
                     }
                 }
             }

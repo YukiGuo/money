@@ -59,6 +59,7 @@
 </script>
 
 <style lang='scss' scoped>
+    @import '../assets/style/variable.scss';
     .wrap {
         .labels {
             background-color: #fff;
@@ -79,7 +80,7 @@
             }
             }
         .icon{
-            color: #DF3A01;
+            color: $colorRed;
         }
         > .createWrap{
       text-align: center;
@@ -87,7 +88,7 @@
         }
         .income {
             > .icon {
-                color: #2E8B57;
+                color: $colorGreen;
             }
         }
     }
