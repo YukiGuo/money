@@ -1,17 +1,25 @@
 <template>
-    <div class="wrap">
+    <div class="wrap" :class="{income:this.type==='+'}">
         <div class="nav">
             <Icon name="arrowleft"/>
-            <span>添加支出标签</span>
+            <span>添加{{type==='-'?'支出':'收入'}}标签</span>
             <button>保存</button>
         </div>
-        <div class="content">
+        <div class="content" >
             <label class="name">
                 <span>名字：</span>
-                <input type="text" placeholder="请输入标签名">
+                <input type="text" placeholder="请输入标签名" v-model="name">
             </label>
             <ul class="iconWrap">
-               <li  v-for="(icon,index) in iconList" :key="index"><Icon :name='icon' class="icon"/></li>
+                <li
+                        v-for="(item,index) in selectedIconList"
+                        :key="index"
+                        @click="toggle(item)"
+                >
+                    <Icon :name='item' class="icon"
+                          :class="{selected:icon===item}"
+                    />
+                </li>
             </ul>
         </div>
     </div>
@@ -27,7 +35,24 @@
         components: {Button}
     })
     export default class NewLabel extends Vue {
-        iconList = iconList.out;
+        name='';
+        type = '';
+        icon='';
+        selectedIconList: string[] = [];
+        toggle(item: string){
+            this.icon=item;
+        }
+         create(name: string,icon: string,type: string){
+               this.$store.commit('createTag',[name,icon,type]);
+           }
+        created() {
+            this.type = this.$route.params.type;
+            if (this.type === '-') {
+                this.selectedIconList = iconList.out;
+            } else {
+                this.selectedIconList = iconList.income;
+            }
+        }
     }
 </script>
 
@@ -41,7 +66,8 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 1px;
-        >button{
+
+        > button {
             background: transparent;
             border: solid $colorRed 1px;
             padding: 2px 6px;
@@ -72,22 +98,45 @@
                 margin-left: 10px;
             }
         }
-        >.iconWrap{
+        > .iconWrap {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             padding: 16px;
-           >li{
-               width: 18vw;
-               display: flex;
-               justify-content: center;
-               >.icon{
-                   padding: 5px;
-                   background: #c4c4c4;
-                   border-radius: 50%;
-                   color: white;
-               }
-           }
+            > li {
+                width: 18vw;
+                display: flex;
+                justify-content: center;
+                > .icon {
+                    padding: 5px;
+                    background: #c4c4c4;
+                    border-radius: 50%;
+                    color: white;
+                    &.selected{
+                        color: $colorRed;
+                        background: white;
+                    }
+                }
+            }
         }
+    }
+    .income{
+        >.nav{
+            >button{
+                border: solid $colorGreen 1px;
+                color: $colorGreen;
+            }
+        }
+        >.content{
+            >.iconWrap{
+                >li{
+                    > .selected {
+                        color: $colorGreen;
+                        background: white;
+                    }
+                }
+            }
+        }
+
     }
 </style>

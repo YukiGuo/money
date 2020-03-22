@@ -16,8 +16,11 @@
                     </router-link>
                 </div>
                 <div class="createWrap">
-                    <Button @click="create" >
-                        新建标签
+                    <Button  >
+                        <router-link :to=" `/label/new/${this.type}`">
+                            新建标签
+                        </router-link>
+
                     </Button>
                 </div>
 
@@ -47,14 +50,14 @@
         created(){
             this.$store.commit('fetchTags')
         }
-        create(){
-            const name =window.prompt('请输入标签名');
-            if(name){
-                this.$store.commit('createTag',name);
-            }else{
-                alert("请输入标签名")
-            }
-        }
+        // create(){
+        //     const name =window.prompt('请输入标签名');
+        //     if(name){
+        //         this.$store.commit('createTag',name);
+        //     }else{
+        //         alert("请输入标签名")
+        //     }
+        // }
     }
 </script>
 

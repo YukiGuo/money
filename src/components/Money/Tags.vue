@@ -9,8 +9,8 @@
                 <Icon :name="tag.icon" class="icon"/>
                 <span>{{tag.name}}</span>
             </li>
-            <li @click="create">
-                <router-link to="/label">
+            <li >
+                <router-link to="/label/new">
                 <Icon name="add" class="icon"/>
                 <span>添加</span>
                 </router-link>
@@ -44,12 +44,12 @@
             this.selectedTag=tag;
                 this.$emit('update:value',this.selectedTag);
         }
-        create(){
-            const name =window.prompt('请输入标签名');
-            if(name){
-                this.$store.commit('createTag',name);
-            }
-        }
+        // create(){
+        //     const name =window.prompt('请输入标签名');
+        //     if(name){
+        //         this.$store.commit('createTag',name);
+        //     }
+        // }
     }
 </script>
 

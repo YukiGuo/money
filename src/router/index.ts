@@ -31,7 +31,7 @@ const routes = [
         component: Label
     },
     {
-        path:'/label/new',
+        path:'/label/new/:type',
         component: NewLabel
     },
     {
