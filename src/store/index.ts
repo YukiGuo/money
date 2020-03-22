@@ -61,13 +61,21 @@ const store = new Vuex.Store({
             }
 
         },
-        createTag(state, name: string) {
+        createTag(state, payload: {name: string; icon: string;type: string}) {
+            const{name,icon,type}=payload;
+            if(name ===''){
+                alert('标签名不能为空');
+            }
+            if(icon===''){
+                alert('icon不能为空');
+                return;
+            }
             const names = state.tagList.map(item => item.name);
             if (names.indexOf(name) >= 0) {
                 alert('标签名重复了');
             } else {
                 const id = createId().toString();
-                state.tagList.push({id, name: name});
+                state.tagList.push({id, name: name,icon:icon,type:type});
                 store.commit('saveTags');
                 alert('添加成功');
             }

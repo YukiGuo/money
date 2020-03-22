@@ -3,7 +3,7 @@
         <div class="nav">
             <Icon name="arrowleft"/>
             <span>添加{{type==='-'?'支出':'收入'}}标签</span>
-            <button>保存</button>
+            <button @click="create()">保存</button>
         </div>
         <div class="content" >
             <label class="name">
@@ -42,8 +42,9 @@
         toggle(item: string){
             this.icon=item;
         }
-         create(name: string,icon: string,type: string){
-               this.$store.commit('createTag',[name,icon,type]);
+         create(){
+              const{name,icon,type}=this;
+               this.$store.commit('createTag',{name:name,icon:icon,type:type});
            }
         created() {
             this.type = this.$route.params.type;
