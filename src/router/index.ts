@@ -6,6 +6,7 @@ import Notfound from '@/views/Notfound.vue';
 import LabelEdict from '@/views/LabelEdict.vue';
 import Bill from '@/views/Bill.vue';
 import BillEdict from '@/components/BillEdict.vue';
+import NewLabel from '@/views/NewLabel.vue';
 Vue.use(VueRouter);
 
 const routes = [
@@ -28,6 +29,10 @@ const routes = [
     {
         path:'/label',
         component: Label
+    },
+    {
+        path:'/label/new',
+        component: NewLabel
     },
     {
         path:'/label/edict/:id',

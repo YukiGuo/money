@@ -1,8 +1,6 @@
 <template>
     <div class="tags">
         <ul>
-            {{tagList[0]}}
-            {{selectedTag}}
             <li
                     v-for="tag in tagList" :key="tag.id"
                     @click="toggle(tag)"
@@ -12,8 +10,10 @@
                 <span>{{tag.name}}</span>
             </li>
             <li @click="create">
+                <router-link to="/label">
                 <Icon name="add" class="icon"/>
                 <span>添加</span>
+                </router-link>
             </li>
         </ul>
     </div>
@@ -27,7 +27,7 @@
     export default class Tags extends Vue {
         @Prop({required: true}) type!: string;
         get tagList() {
-            // return  this.$store.state.tagList;
+           // return  this.$store.state.tagList;
             return tagArray.filter(item => item.type === this.type);
         }
         beforeCreate(){

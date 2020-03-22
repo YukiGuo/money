@@ -3,12 +3,13 @@ import Vuex from 'vuex';
 import clone from '@/lib/clone';
 import createId from '@/lib/createId';
 import router from '@/router';
+import tagArray from '@/constants/tagArray';
 
 Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
         recordList: [],
-        tagList: [],
+        tagList: tagArray,
         currentTag: undefined
     } as RootState,
     mutations: {
@@ -29,7 +30,7 @@ const store = new Vuex.Store({
             store.commit('saveRecords');
         },
         fetchTags(state) {
-            state.tagList = JSON.parse(window.localStorage.getItem('tagList') || '[]');
+            state.tagList = JSON.parse(window.localStorage.getItem('tagList')||'[]');
         },
         getCurrentTag(state, id: string) {
             state.currentTag = state.tagList.filter(item => (item.id === id))[0];

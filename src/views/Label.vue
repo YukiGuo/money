@@ -2,8 +2,15 @@
     <div>
         <Layout>
             <div class="wrap">
+                <Tab :list="typeList" :value.sync="type"/>
                 <div class="labels">
-                    <router-link class='tagWrap' :to=" `/label/edict/${tag.id}`" v-for="tag in tagList" :key=tag.id >
+                    <router-link
+                            class='tagWrap'
+                            :to=" `/label/edict/${tag.id}`"
+                            v-for="tag in tagList" :key=tag.id
+                            :class="{income:tag.type==='+'}"
+                    >
+                          <Icon :name="tag.icon" class="icon" />
                            <span>{{tag.name}}</span>
                         <Icon name="arrowright"/>
                     </router-link>
@@ -22,14 +29,20 @@
 
 <script lang='ts'>
     import Vue from 'vue';
-    import {Component} from 'vue-property-decorator';
+    import {Component, Prop} from 'vue-property-decorator';
     import Button from '@/components/Button.vue';
+    import tagArray from '@/constants/tagArray';
+    import Tab from '@/components/Tab.vue';
+    import typeList from '@/constants/typelist';
     @Component({
-        components: {Button}
+        components: {Button,Tab}
     })
     export default class Label extends Vue{
+        typeList=typeList;
+        type='-';
         get tagList(){
-          return  this.$store.state.tagList;
+      //    return  this.$store.state.tagList;
+            return tagArray.filter(t=>t.type===this.type);
         }
         created(){
             this.$store.commit('fetchTags')
@@ -59,13 +72,23 @@
                 border-bottom: 1px solid #ddd;
                 color: #999999;
                 > span {
-                    color: #333
+                    color: #333;
+                    margin-right: auto;
+                    margin-left: 16px;
                 }
             }
             }
+        .icon{
+            color: #DF3A01;
+        }
         > .createWrap{
       text-align: center;
             margin-top: 40px;
+        }
+        .income {
+            > .icon {
+                color: #2E8B57;
+            }
         }
     }
 </style>
