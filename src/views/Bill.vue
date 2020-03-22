@@ -191,11 +191,10 @@
             }
 
             > .type {
-                font-size: 18px;
+                font-size: 16px;
                 color: #444444;
-                font-weight: 600;
                 >span{
-                    margin-right: 6px;
+                    margin-right: 4px;
                 }
             }
         }
@@ -219,7 +218,8 @@
                 background: white;
                 margin-bottom: 2px;
                 padding: 8px;
-
+                text-decoration: none;
+                color:inherit;
                 > .logo {
                     font-size: 20px;
                     color: #DF3A01;
@@ -242,8 +242,7 @@
                 > .money {
                     display: flex;
                     flex-direction: column;
-                    font-size: 18px;
-                    font-weight: 600;
+                    font-size: 16px;
                     color: $colorRed;
                 }
             }

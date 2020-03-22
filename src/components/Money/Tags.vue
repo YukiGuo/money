@@ -10,7 +10,7 @@
                 <span>{{tag.name}}</span>
             </li>
             <li >
-                <router-link to="/label/new">
+                <router-link :to=" `/label/new/${this.type}`" class="newTag">
                 <Icon name="add" class="icon"/>
                 <span>添加</span>
                 </router-link>
@@ -27,8 +27,8 @@
     export default class Tags extends Vue {
         @Prop({required: true}) type!: string;
         get tagList() {
-           // return  this.$store.state.tagList;
-            return tagArray.filter(item => item.type === this.type);
+            return  this.$store.state.tagList.filter(item => item.type === this.type);
+            //return tagArray.filter(item => item.type === this.type);
         }
         beforeCreate(){
             this.$store.commit('fetchTags')
@@ -78,7 +78,6 @@
                 margin-left: 4vw;
                 margin-top: 5px;
                 font-size: 13px;
-
                 > .icon {
                     display: flex;
                     justify-content: center;
@@ -112,6 +111,10 @@
                 padding: 0 3px;
                 color: #999;
             }
+        }
+        .newTag{
+            text-decoration: none;
+            color: #8C9098;
         }
     }
 </style>

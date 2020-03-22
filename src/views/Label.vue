@@ -17,7 +17,7 @@
                 </div>
                 <div class="createWrap">
                     <Button  >
-                        <router-link :to=" `/label/new/${this.type}`">
+                        <router-link :to=" `/label/new/${this.type}`" class="newTag">
                             新建标签
                         </router-link>
 
@@ -86,13 +86,17 @@
             color: $colorRed;
         }
         > .createWrap{
-      text-align: center;
-            margin-top: 40px;
+           text-align: center;
+            margin: 20px 0;
         }
         .income {
             > .icon {
                 color: $colorGreen;
             }
+        }
+        .newTag{
+            text-decoration: none;
+            color: white;
         }
     }
 </style>

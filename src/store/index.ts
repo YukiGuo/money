@@ -9,7 +9,7 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
     state: {
         recordList: [],
-        tagList: tagArray,
+        tagList: [],
         currentTag: undefined
     } as RootState,
     mutations: {
@@ -30,7 +30,11 @@ const store = new Vuex.Store({
             store.commit('saveRecords');
         },
         fetchTags(state) {
-            state.tagList = JSON.parse(window.localStorage.getItem('tagList')||'[]');
+            const list=JSON.stringify(tagArray);
+            state.tagList = JSON.parse(window.localStorage.getItem('tagList')||list);
+            window.localStorage.setItem('_idMax',state.tagList.length.toString());
+            store.commit('saveTags');
+
         },
         getCurrentTag(state, id: string) {
             state.currentTag = state.tagList.filter(item => (item.id === id))[0];
