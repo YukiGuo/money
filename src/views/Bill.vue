@@ -35,7 +35,7 @@
                         <span> {{ beautify(group.title)}}</span>
                         <span>￥{{group.total.toFixed(2)}}</span>
                     </div>
-                    <div
+                    <router-link to="/bill/edict"
                             v-for="(item,index) in group.items" :key="index"
                             class="item"
                             :class="{income:item.type==='+'}"
@@ -50,7 +50,7 @@
                         <span class="money">
                                 <span>{{item.type}} {{item.amount}}</span>
                             </span>
-                    </div>
+                    </router-link>
                 </div>
             </div>
         </Layout>
@@ -76,10 +76,6 @@
             return (this.$store.state as RootState).recordList;
         }
         get selectedList(){
-            console.log(dayjs(this.recordList[0].createdDate).year());
-            console.log(dayjs(this.recordList[0].createdDate).month());
-            console.log(dayjs(this.recordList[1].createdDate).year());
-            console.log(dayjs(this.recordList[1].createdDate).month());
            const a= this.recordList.filter(t => dayjs(t.createdDate).year() === this.selectedYear)
                     .filter(t => dayjs(t.createdDate).month() === this.selectedMonth - 1);
             return a

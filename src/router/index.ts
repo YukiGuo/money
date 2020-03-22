@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Bill from '@/views/Bill.vue';
 import Label from '@/views/Label.vue';
 import Money from '@/views/Money.vue';
 import Notfound from '@/views/Notfound.vue';
 import LabelEdict from '@/views/LabelEdict.vue';
 import Bill from '@/views/Bill.vue';
+import BillEdict from '@/components/BillEdict.vue';
 Vue.use(VueRouter);
 
 const routes = [
@@ -18,8 +18,12 @@ const routes = [
         component: Money
     },
     {
-        path:'/statistics',
+        path:'/bill',
         component: Bill
+    },
+    {
+        path:'/bill/edict',
+        component: BillEdict
     },
     {
         path:'/label',

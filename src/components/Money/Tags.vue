@@ -1,6 +1,8 @@
 <template>
     <div class="tags">
         <ul>
+            {{tagList[0]}}
+            {{selectedTag}}
             <li
                     v-for="tag in tagList" :key="tag.id"
                     @click="toggle(tag)"
@@ -28,14 +30,19 @@
             // return  this.$store.state.tagList;
             return tagArray.filter(item => item.type === this.type);
         }
-        created(){
+        beforeCreate(){
             this.$store.commit('fetchTags')
         }
-        selectedTag: Tag= {} ;
+        // get selectedTag(){
+        //    return  this.tagList[0];
+        // }
+        // set selectedTag(a){
+        //     this.selectedTag=a
+        // }
+      selectedTag: Tag=this.tagList[0];
         toggle(tag: Tag) {
-                this.selectedTag=tag;
+            this.selectedTag=tag;
                 this.$emit('update:value',this.selectedTag);
-            console.log(this.selectedTag)
         }
         create(){
             const name =window.prompt('请输入标签名');

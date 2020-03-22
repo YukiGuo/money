@@ -3,7 +3,7 @@
         <router-link class="item" to="/money" active-class="selected">
             <Icon name ='money' />记账
         </router-link>
-        <router-link class="item"  to="/statistics" active-class="selected">
+        <router-link class="item"  to="/bill" active-class="selected">
             <Icon name ='bill' />明细
         </router-link>
         <router-link  class="item"  to="/label" active-class="selected">
