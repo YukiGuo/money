@@ -7,6 +7,7 @@ import LabelEdict from '@/views/LabelEdict.vue';
 import Bill from '@/views/Bill.vue';
 import BillEdict from '@/components/BillEdict.vue';
 import NewLabel from '@/views/NewLabel.vue';
+import Statistics from '@/views/Statistics.vue';
 Vue.use(VueRouter);
 
 const routes = [
@@ -25,6 +26,10 @@ const routes = [
     {
         path:'/bill/edict',
         component: BillEdict
+    },
+    {
+        path:'/statistics',
+        component: Statistics
     },
     {
         path:'/label',

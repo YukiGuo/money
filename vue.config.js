@@ -2,6 +2,10 @@
 const path = require('path');
 module.exports = {
   lintOnSave: false,
+  transpileDependencies: [
+    'vue-echarts',
+    'resize-detector'
+  ],
   chainWebpack: config => {
     const dir = path.resolve(__dirname, 'src/assets/icons');
 
