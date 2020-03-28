@@ -4,28 +4,8 @@
             <div class="record">
                 <div class="nav">
                     <h3>我的账单</h3>
-                    <div class="date">
-                        <label>
-                            <select class="year" v-model="selectedYear">
-                                <option class="yearItem"
-                                        v-for="(year,index) in yearList" :key="index"
-                                >
-                                    {{year}}
-                                </option>
-                            </select>年
-                        </label>
-                        <label>
-                            <select v-model="selectedMonth">
-                                <option class="monthItem"
-                                        :value="month" v-for="(month,index) in monthList" :key="index"
-                                >
-                                    {{month}}
-                                </option>
-                            </select>月
-                        </label>
-                    </div>
                     <div class="type">
-                        <span>{{selectedMonth}}月</span>
+                        <vue-datepicker-local v-model="time" format="YYYY-MM" class="time"/>
                         <span>支出：</span><span>{{total('-').toFixed(2)}}</span>
                         <span>收入：</span><span>{{total('+').toFixed(2)}}</span>
                     </div>
@@ -62,30 +42,30 @@
     import {Component} from 'vue-property-decorator';
     import dayjs from 'dayjs';
     import clone from '@/lib/clone';
-    import dateList from '@/constants/dateList';
 
     @Component
     export default class Bill extends Vue {
-        type = '-';
         time = new Date();
-        selectedYear: number = dayjs().year();
-        selectedMonth: number = dayjs().month() + 1;
-        monthList: number[] = dateList.month;
-        yearList: number[] = dateList.year;
+        get year(){
+            return dayjs(this.time.toISOString()).year();
+        }
+        get month(){
+            return dayjs(this.time.toISOString()).month() + 1;
+        }
         get recordList() {
             return (this.$store.state as RootState).recordList;
         }
         get selectedList(){
-           const a= this.recordList.filter(t => dayjs(t.createdDate).year() === this.selectedYear)
-                    .filter(t => dayjs(t.createdDate).month() === this.selectedMonth - 1);
-            return a
+            const{year,month}=this;
+         return    this.recordList.filter(t => dayjs(t.createdDate).year() === year).filter(t => dayjs(t.createdDate).month() === month - 1);
         }
         get showList() {
             const {recordList} = this;
             if (recordList.length === 0) {
                 return [] as GroupList;
             }
-            const newList = clone(this.selectedList)
+
+            const newList = clone(this.selectedList!)
                 .sort((a, b) => dayjs(b.createdDate).valueOf() - dayjs(a.createdDate).valueOf());
             if (newList.length === 0) {
                 return [] as GroupList;
@@ -148,7 +128,7 @@
         }
 
         total(type: string) {
-            const typeList = this.selectedList.filter(t => t.type === type);
+            const typeList = this.selectedList!.filter(t => t.type === type);
             return typeList.reduce((sum, item) => {return sum + item.amount;}, 0);
         }
 
@@ -193,8 +173,15 @@
             > .type {
                 font-size: 16px;
                 color: #444444;
+                background-color: white;
+                display: flex;
+                align-items: center;
+
+                margin-top: 8px;
                 >span{
                     margin-right: 4px;
+                    font-size: 12px;
+                    font-weight: bold;
                 }
             }
         }
@@ -256,5 +243,8 @@
                 }
             }
         }
+    }
+    .time{
+        width: 100px;
     }
 </style>
