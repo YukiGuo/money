@@ -1,7 +1,10 @@
 <template>
     <div>
+        <vue-datepicker-local v-model="time" format="YYYY-MM"/>
+        {{type}}------{{interval}}
+        <Tab :list="typeList" :value.sync="type"/>
         <Tab :list="intervalList" :value.sync="interval"/>
-        <v-chart :options="bar" class="echarts"/>
+        <BarChart :type="type"  :month='month'  :year='year' :interval="interval"/>
         <PieChart :type="type" :month='month'  :year='year'  />
     </div>
 </template>
@@ -10,6 +13,7 @@
     import Vue from 'vue'
     import {Component} from 'vue-property-decorator';
     import Tab from '@/components/Tab.vue';
+    import typeList from '@/constants/typelist';
     import intervalList from '@/constants/intervalList';
     import ECharts from 'vue-echarts'
     import 'echarts/lib/chart/line'
@@ -17,34 +21,18 @@
     import "echarts/lib/chart/pie";
     import "echarts/lib/chart/bar";
     import PieChart from '@/components/PieChart.vue';
+    import BarChart from '@/components/BarChart.vue';
     @Component({
-        components: {PieChart, Tab, 'v-chart': ECharts}
+        components: {BarChart, PieChart, Tab, 'v-chart': ECharts}
     })
     export default class Statistics extends  Vue {
+        time= new Date();
+        typeList=typeList;
         intervalList = intervalList;
-        interval = 'month';
+        interval = 'year';
         month = 3;
         year = 2020;
         type = '-';
-        bar = {
-            title: {
-                text: '第一个 ECharts 实例'
-            },
-            // tooltip: {},
-            xAxis: {
-                type: 'category',
-                data: ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"]
-            },
-            yAxis: {
-                type: 'value'
-            },
-            series: [{
-                name: '销量',
-                type: 'line',
-                data: [5, 20, 36, 10, 10, 20,50,70,60,90,100,160]
-            }]
-        };
-
     }
 </script>
 

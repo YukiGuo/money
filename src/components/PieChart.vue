@@ -1,9 +1,5 @@
 <template>
     <div>
-        year:{{year}}
-       month: {{month}}
-        type:{{type}}
-        pieDataSource:{{pieData}}
         <v-chart :options="pie" class="echarts"/>
     </div>
 </template>
@@ -29,7 +25,8 @@
             return getList(recordList,year,month,type);
         }
         get pieData(){
-         return   getPieList(this.pieDataSource)
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+         return   getPieList((this.pieDataSource)!)
         }
         beforeCreate(){
             this.$store.commit("fetchRecords")
