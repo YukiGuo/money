@@ -3,7 +3,10 @@
         <Layout class-prefix="xxx">
             <Tab :list="typeList" :value.sync="record.type"/>
             <Tags @update:value="onUpdateTag" :type="record.type"/>
-            <FormItem @update:value="onUpdateNotes" file-name="备注" placeholder="请填写备注"/>
+            <div class="timeWrap">
+                <vue-datepicker-local class="time" v-model="createdDate"  @input="onUpdateDate" />
+                <FormItem @update:value="onUpdateNotes" file-name="备注" placeholder="请填写备注"/>
+            </div>
             <NumberPad @update:value="onUpdateAmount" @submit:value="saveRecordList"/>
         </Layout>
     </div>
@@ -27,11 +30,13 @@
         tags=this.$store.state.tagList;
         recordList: RecordItem[]=this.$store.state.recordList;
         typeList=typeList;
+        createdDate=new Date();
         record ={
             tag:{},
             notes:'',
             type:'-',
-            amount:0
+            amount:0,
+            createdDate:this.createdDate.toISOString()
         };
         onUpdateTag(value: string[]){
             this.record.tag=value;
@@ -45,6 +50,9 @@
         onUpdateNotes(value: string){
             this.record.notes=value;
         }
+        onUpdateDate(value: string){
+            this.record.createdDate=value;
+        }
         saveRecordList(){
             this.$store.commit('createRecord',this.record)
         }
@@ -57,6 +65,18 @@
         justify-content: flex-end;
         overflow: auto;
     }
+    .timeWrap{
+        padding: 0 10px;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        background-color: white;
+        >.time{
+            width: 120px;
+            display: flex;
+        }
+    }
+
 </style>
 <style lang='scss' scoped>
 </style>
