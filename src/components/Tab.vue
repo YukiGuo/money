@@ -48,7 +48,7 @@
         align-items: center;
          .tab-item {
              position: relative;
-             height: 64px;
+             height: 56px;
              width: 50vw;
              display: flex;
              align-items: center;

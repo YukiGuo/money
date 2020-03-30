@@ -3,11 +3,11 @@
         <Layout>
             <div class="record">
                 <div class="nav">
-                    <h3>我的账单</h3>
+                    <div class="nav-title">我的账单</div>
                     <div class="type">
                         <vue-datepicker-local v-model="time" format="YYYY-MM" class="time"/>
-                        <span>支出：</span><span>{{total('-').toFixed(2)}}</span>
-                        <span>收入：</span><span>{{total('+').toFixed(2)}}</span>
+                        <span>总支出：{{total('-').toFixed(0)}}</span>
+                        <span>总收入：{{total('+').toFixed(0)}}</span>
                     </div>
                 </div>
                 <div v-for="(group,index) in showList" :key="index" class="recordItem">
@@ -23,9 +23,6 @@
                         <Icon class="logo" :name="item.tag.icon"/>
                         <span class="tag">
                                <span>{{item.tag.name}}</span>
-                              <span
-                                      class="note"
-                              >{{item.notes}}</span>
                             </span>
                         <span class="money">
                                 <span>{{item.type}} {{item.amount}}</span>
@@ -156,9 +153,13 @@
     .record {
         .nav {
             font-size: 20px;
-            padding: 10px 16px;
-            border-bottom: white 4px solid;
-
+            >.nav-title{
+                background: #fff;
+                font-weight: bold;
+                padding: 10px 16px;
+                margin-bottom: 5px;
+                border-radius: 5px;
+            }
             > .date {
                 font-size: 18px;
                 font-weight: 500;
@@ -171,44 +172,47 @@
             }
 
             > .type {
+                display: flex;
+                justify-content: space-between;
                 font-size: 16px;
                 color: #444444;
                 background-color: white;
-                display: flex;
                 align-items: center;
-
                 margin-top: 8px;
+                padding: 5px;
+                .time{
+                    width:110px
+                }
                 >span{
-                    margin-right: 4px;
-                    font-size: 12px;
-                    font-weight: bold;
+                    display: inline-block;
+                    padding: 0 10px;
+                    font-size: 14px;
                 }
             }
         }
 
         > .recordItem {
-            padding: 0 16px;
+            padding: 0 8px;
 
             > .title {
                 display: flex;
                 justify-content: space-between;
                 line-height: 40px;
                 font-weight: bold;
-                font-size: 18px;
-                padding: 0 8px;
+                font-size: 14px;
             }
 
             > .item {
+                font-size: 16px;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 background: white;
-                margin-bottom: 2px;
-                padding: 8px;
+                margin-bottom: 1px;
+                padding:10px 4px;
                 text-decoration: none;
                 color:inherit;
                 > .logo {
-                    font-size: 20px;
                     color: #DF3A01;
                 }
 
@@ -217,13 +221,6 @@
                     margin-left: 15px;
                     display: flex;
                     flex-direction: column;
-
-                    > .note {
-                        font-size: 14px;
-                        color: #c6c6c6;
-                        line-height: 16px;
-                        height: 16px;
-                    }
                 }
 
                 > .money {
@@ -244,7 +241,5 @@
             }
         }
     }
-    .time{
-        width: 100px;
-    }
+
 </style>

@@ -28,16 +28,20 @@
 
 <style lang='scss' scoped>
     .note {
-        display: block;
-        align-items: center;
+        font-size: 12px;
+        display: flex;
+        justify-content: center;
         padding-left: 20px;
-        min-height: 50px;
-        line-height: 50px;
+        height: 50px;
         background-color: white;
+        >.name{
+           display: flex;
+           align-items: center;
+            min-width: 40px;
+        }
         > input {
             padding-left: 5px;
             border: none;
-            flex-grow: 1;
         }
     }
 </style>

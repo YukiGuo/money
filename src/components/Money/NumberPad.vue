@@ -102,8 +102,8 @@
         }
 
         > .output {
-            font-size: 36px;
-            padding: 9px 16px;
+            font-size: 30px;
+            padding: 4px 16px;
             font-family: Consolas, monospace;
             text-align: right;
         }
@@ -118,8 +118,7 @@
                 height: 50px;
                 background-color: white;
                 border: none;
-                font-size: 18px;
-
+                font-size: 16px;
                 &.ok {
                     height: 100px;
                     float: right;

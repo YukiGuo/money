@@ -5,7 +5,7 @@
             <Tags @update:value="onUpdateTag" :type="record.type"/>
             <div class="timeWrap">
                 <vue-datepicker-local class="time" v-model="createdDate"  @input="onUpdateDate" />
-                <FormItem @update:value="onUpdateNotes" file-name="备注" placeholder="请填写备注"/>
+                <FormItem @update:value="onUpdateNotes" file-name="备注:" placeholder="请填写备注" class="form"/>
             </div>
             <NumberPad @update:value="onUpdateAmount" @submit:value="saveRecordList"/>
         </Layout>
@@ -62,18 +62,20 @@
     .xxx-content {
         display: flex;
         flex-direction: column;
-        justify-content: flex-end;
+        //justify-content: flex-end;
         overflow: auto;
     }
     .timeWrap{
         padding: 0 10px;
         display: flex;
-        justify-content: start;
+        justify-content: space-between;
         align-items: center;
         background-color: white;
         >.time{
-            width: 120px;
-            display: flex;
+            width:130px
+        }
+        .form{
+            width:50%;
         }
     }
 

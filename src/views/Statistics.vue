@@ -68,7 +68,8 @@
             background: #fff;
             font-weight: bold;
             padding: 10px 16px;
-            margin-bottom: 5px;
+            margin-bottom:5px;
+            border-radius: 5px;
         }
         .option {
             display: flex;
