@@ -1,23 +1,26 @@
 import dayjs from 'dayjs';
 
-function getList(data: RecordItem[], year: number, month: number, type: string) {
+function getList(data: RecordItem[], year: number, type: string, month?: number,) {
     let a;
-    if (arguments.length === 4) {
+    if(month===undefined){
+        a = data
+            .filter((t: RecordItem) => t.type === type)
+            .filter(t => dayjs(t.createdDate).year() === year);
+    }else {
         a = data
             .filter((t: RecordItem) => t.type === type)
             .filter(t => dayjs(t.createdDate).year() === year)
             .filter(t => dayjs(t.createdDate).month() === month - 1);
-
-    } else if (arguments.length === 3) {
-        a = data
-            .filter((t: RecordItem) => t.type === type)
-            .filter(t => dayjs(t.createdDate).year() === year);
     }
     return a;
 }
 
 function getPieList(data: RecordItem[]) {
-    const pieData: { value: number; name: string }[] = [];
+    const pieData: PieList = [];
+    if (data.length<1){
+        console.log('无数据');
+        return [] as PieList
+    }else{
     pieData[0] = {value: data[0].amount, name: data[0].tag.name};
     for (let i = 1; i < data.length; i++) {
         const tags = pieData.map(t => t.name);
@@ -28,6 +31,7 @@ function getPieList(data: RecordItem[]) {
         } else {
             pieData.push({value: data[i].amount, name: name});
         }
+    }
     }
     return pieData;
 
@@ -47,8 +51,7 @@ function barOrigin(interval: string) {
 }
 
 function getBarList(data: RecordItem[], interval: string) {////createDate
-    const barList: { value: number; name: string }[] =barOrigin(interval);
-    console.log(barList);
+    const barList: BarList =barOrigin(interval);
     if (interval==='year') {
         for (let i = 1; i < data.length; i++) {
             const names = barList.map(t => t.name);

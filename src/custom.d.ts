@@ -5,6 +5,8 @@ type RecordItem ={
     amount: number;
     createdDate?: string;
 };
+type BarList={ value: number; name: string }[]
+type PieList={ value: number; name: string }[]
 type Tag = {
     id: string;
     name: string;

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-chart :options="pie" class="echarts"/>
+        <v-chart :options="getPie(this.pieData)" class="echarts"/>
     </div>
 </template>
 
@@ -10,62 +10,35 @@
     import ECharts from 'vue-echarts'
     import "echarts/lib/chart/pie";
     import {getList, getPieList} from '@/lib/commonFun';
+    import getPie from '@/lib/getPie';
       @Component({
         components: {'v-chart': ECharts}
     })
-    export default class PieChart extends Vue{
-        @Prop({required:true}) type!: string;
-        @Prop({required:true}) month!: number;
-        @Prop({required:true}) year!: number;
-        get recordList(){
-            return (this.$store.state).recordList;
-        }
-        get pieDataSource(){
-            const{recordList,year,month,type}=this;
-            return getList(recordList,year,month,type);
-        }
-        get pieData(){
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-         return   getPieList((this.pieDataSource)!)
-        }
-        beforeCreate(){
-            this.$store.commit("fetchRecords")
-        }
-        pie = {
-            tooltip: {
-                trigger: 'item',
-                formatter: '{a} <br/>{b}: {c} ({d}%)'
-            },
-            legend: {
-                orient: 'vertical',
-                left: 10,
-                data: this.pieData.map(t=>t.name)
-            },
-            series: [
-                {
-                    name: '分类统计',
-                    type: 'pie',
-                    radius: ['50%', '70%'],
-                    avoidLabelOverlap: false,
-                    label: {
-                        show: false,
-                        position: 'center'
-                    },
-                    emphasis: {
-                        label: {
-                            show: true,
-                            fontSize: '30',
-                            fontWeight: 'bold'
-                        }
-                    },
-                    labelLine: {
-                        show: false
-                    },
-                    data:this.pieData
-                }
-            ]
-        };
-    }
+    export default class PieChart extends Vue {
+          @Prop({required: true}) type!: string;
+          @Prop({required: true}) month!: number;
+          @Prop({required: true}) year!: number;
+          @Prop({required: true}) interval!: string;
+          getPie=getPie;
+          get recordList() {
+              return (this.$store.state).recordList;
+          }
+          get selectedData() {
+              const {recordList, year, month, type, interval} = this;
+              if (interval === 'year') {
+                  return getList(recordList, year, type);
+              } else {
+                  return getList(recordList, year, type, month);
+              }
+          }
+          get pieData() {
+              return getPieList((this.selectedData))
+          }
+
+          beforeCreate() {
+              this.$store.commit("fetchRecords")
+          }
+      }
 </script>
 
 <style lang='scss' scoped>

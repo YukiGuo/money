@@ -1,7 +1,6 @@
 <template>
     <div>
-        type:{{type}}-------- {{interval}}
-        <v-chart :options="bar" class="echarts"/>
+        <v-chart :options="getBar(barData)" />
     </div>
 </template>
 
@@ -10,7 +9,8 @@
     import {Component, Prop} from 'vue-property-decorator';
     import ECharts from 'vue-echarts'
     import 'echarts/lib/chart/line'
-    import {getList, getBarList} from '@/lib/commonFun';
+    import {getBarList, getList} from '@/lib/commonFun';
+    import getBar from '@/lib/getBar';
     @Component({
         components: {'v-chart': ECharts}
     })
@@ -19,33 +19,31 @@
         @Prop({required:true}) month!: number;
         @Prop({required:true}) year!: number;
         @Prop({required:true}) interval!: string;
+        getBar=getBar;
 
         get recordList(){
             return (this.$store.state).recordList;
         }
-        get barDataSource(){
-            const{recordList,year,month,type}=this;
-                return getList(recordList,year,month,type);
+        get selectedData(){
+            const{recordList,year,month,type,interval}=this;
+            if(interval==='year'){
+                return  getList(recordList,year,type);
+            }else {
+                return getList(recordList,year,type,month);
+            }
         }
         get barData(){
-            return   getBarList((this.barDataSource)!,this.interval)
+            return  getBarList((this.selectedData),this.interval)
+        }
+      aAxis(data: BarList){
+            return data.map(t=>t.name)
+        }
+       yAxis(data: BarList){
+            return data.map(t=>t.value)
         }
         beforeCreate(){
             this.$store.commit("fetchRecords")
         }
-       bar = {
-            xAxis: {
-                type: 'category',
-                data: this.barData.map(t=>t.name)
-            },
-            yAxis: {
-                type: 'value'
-            },
-            series: [{
-                data:  this.barData.map(t=>t.value),
-                type: 'line'
-            }]
-        };
     }
 </script>
 
