@@ -9,6 +9,9 @@
         <router-link  class="item"  to="/label" active-class="selected">
             <Icon name ='label' />标签
         </router-link>
+        <router-link  class="item"  to="/statistics" active-class="selected">
+            <Icon name ='statistics' />统计
+        </router-link>
     </nav>
 </template>
 
@@ -29,12 +32,13 @@ nav{
     padding: 5px 0;
     > .item{
         text-decoration: none;
+        font-size: 14px;
         width: 33.3333%;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        color: #333;
+        color: #8C9098;
     }
     > .item.selected{
         color: $colorBlue;
