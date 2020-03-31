@@ -32,6 +32,7 @@
         typeList=typeList;
         createdDate=new Date();
         record ={
+            id:'',
             tag:{},
             notes:'',
             type:'-',

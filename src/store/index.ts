@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import clone from '@/lib/clone';
-import createId from '@/lib/createId';
+import{ createId, createIdRecord} from '@/lib/createId';
 import router from '@/router';
 import tagArray from '@/constants/tagArray';
 
@@ -24,8 +24,17 @@ const store = new Vuex.Store({
             window.localStorage.setItem('recordList', JSON.stringify(state.recordList));
         },
         createRecord(state, record: RecordItem) {
+            record.id=createIdRecord().toString();
             const copy = clone(record);
             state.recordList?.push(copy);
+            store.commit('saveRecords');
+        },
+        deleteRecord(state,record: RecordItem){
+            const id=record.id;
+            const allId =state.recordList.map(t=>t.id);
+            const index= allId.indexOf(id);
+            console.log(index);
+            state.recordList.splice(index,1);
             store.commit('saveRecords');
         },
         fetchTags(state) {

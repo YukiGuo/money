@@ -133,7 +133,6 @@
             this.$store.commit('fetchRecords');
         }
        goEdict(item: RecordItem){
-           console.log(item);
            this.$router.push({name: 'newLocation',params:{item:JSON.stringify(item)}})
         }
     }

@@ -28,7 +28,7 @@
                 <span>{{item.note}} </span>
             </div>
         </div>
-        <Button  class="button">删除明细</Button>
+        <Button  class="button" @click="deleteRecord">删除明细</Button>
 
     </div>
 </template>
@@ -49,6 +49,10 @@
         }
         formatDate(date: string){
             return dayjs(date).format('YYYY-M-D')
+        }
+        deleteRecord(){
+            this.$store.commit('deleteRecord',this.item);
+            this.$router.push('/bill');
         }
     }
 </script>
