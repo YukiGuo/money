@@ -1,11 +1,12 @@
 <template>
     <div class="wrap" :class="{income:this.type==='+'}">
         <div class="nav">
-            <Icon name="arrowleft"/>
+            <div @click="goBack"> <Icon name="arrowleft" /></div>
+
             <span>添加{{type==='-'?'支出':'收入'}}标签</span>
             <button @click="create()">保存</button>
         </div>
-        <div class="content" >
+        <div class="content">
             <label class="name">
                 <span>名字：</span>
                 <input type="text" placeholder="请输入标签名" v-model="name">
@@ -35,17 +36,25 @@
         components: {Button}
     })
     export default class NewLabel extends Vue {
-        name='';
+        name = '';
         type = '';
-        icon='';
+        icon = '';
         selectedIconList: string[] = [];
-        toggle(item: string){
-            this.icon=item;
+
+        toggle(item: string) {
+            this.icon = item;
         }
-         create(){
-              const{name,icon,type}=this;
-               this.$store.commit('createTag',{name:name,icon:icon,type:type});
-           }
+
+        create() {
+            const {name, icon, type} = this;
+            this.$store.commit('createTag', {name: name, icon: icon, type: type});
+        }
+
+        goBack() {
+            console.log('xxx');
+            this.$router.back();
+        }
+
         created() {
             this.type = this.$route.params.type;
             if (this.type === '-') {
@@ -99,21 +108,25 @@
                 margin-left: 10px;
             }
         }
+
         > .iconWrap {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             padding: 16px;
+
             > li {
                 width: 18vw;
                 display: flex;
                 justify-content: center;
+
                 > .icon {
                     padding: 5px;
                     background: #c4c4c4;
                     border-radius: 50%;
                     color: white;
-                    &.selected{
+
+                    &.selected {
                         color: $colorRed;
                         background: white;
                     }
@@ -121,16 +134,18 @@
             }
         }
     }
-    .income{
-        >.nav{
-            >button{
+
+    .income {
+        > .nav {
+            > button {
                 border: solid $colorGreen 1px;
                 color: $colorGreen;
             }
         }
-        >.content{
-            >.iconWrap{
-                >li{
+
+        > .content {
+            > .iconWrap {
+                > li {
                     > .selected {
                         color: $colorGreen;
                         background: white;
