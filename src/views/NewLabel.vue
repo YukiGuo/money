@@ -75,8 +75,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 1px;
-
+        margin-bottom: 2px;
         > button {
             background: transparent;
             border: solid $colorRed 1px;
@@ -111,24 +110,23 @@
 
         > .iconWrap {
             display: flex;
-            justify-content: center;
+            justify-content: start;
             flex-wrap: wrap;
             padding: 16px;
+            background: white;
+            margin-top: 2px;
 
             > li {
                 width: 18vw;
                 display: flex;
                 justify-content: center;
-
+                margin: 5px 0;
                 > .icon {
                     padding: 5px;
-                    background: #c4c4c4;
-                    border-radius: 50%;
-                    color: white;
-
+                    color: #999;
+                    font-size: 16px;
                     &.selected {
                         color: $colorRed;
-                        background: white;
                     }
                 }
             }
@@ -148,7 +146,6 @@
                 > li {
                     > .selected {
                         color: $colorGreen;
-                        background: white;
                     }
                 }
             }
