@@ -41,9 +41,15 @@
         }
 
         ok() {
-            this.$emit('update:value',this.output);
-            this.$emit('submit:value', this.output );
-            this.output='0'
+            if(parseFloat(this.output)<=0){
+                alert('金额不能为0');
+                return
+            }else{
+                this.$emit('update:value',this.output);
+                this.$emit('submit:value', this.output );
+                this.output='0'
+            }
+
         }
 
         inputContent(event: MouseEvent) {
