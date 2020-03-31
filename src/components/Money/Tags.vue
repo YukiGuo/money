@@ -83,6 +83,7 @@
                 margin-left: 4vw;
                 margin-top: 5px;
                 font-size: 13px;
+
                 > .icon {
                     display: flex;
                     justify-content: center;
@@ -92,6 +93,7 @@
                     background: #F0F0F0;
                     border-radius: 50px;
                     color: #8C9098;
+                    padding: 4px;
                     margin-bottom: 8px;
                 }
 

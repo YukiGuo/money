@@ -75,6 +75,7 @@
                 padding: 5px 15px;
                 border-bottom: 1px solid #ddd;
                 color: #999999;
+                font-size: 18px;
                 > span {
                     color: #333;
                     margin-right: auto;

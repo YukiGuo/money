@@ -77,6 +77,7 @@ const store = new Vuex.Store({
             const{name,icon,type}=payload;
             if(name ===''){
                 alert('标签名不能为空');
+                return;
             }
             if(icon===''){
                 alert('icon不能为空');
