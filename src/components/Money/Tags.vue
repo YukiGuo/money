@@ -21,35 +21,40 @@
 
 <script lang='ts'>
     import Vue from 'vue';
-    import {Component, Prop} from 'vue-property-decorator';
+    import {Component, Prop, Watch} from 'vue-property-decorator';
     import tagArray from '@/constants/tagArray';
     @Component
     export default class Tags extends Vue {
         @Prop({required: true}) type!: string;
         get tagList() {
-            return  this.$store.state.tagList.filter(item => item.type === this.type);
+            return  this.$store.state.tagList.filter((item: Tag) => item.type === this.type);
             //return tagArray.filter(item => item.type === this.type);
         }
         beforeCreate(){
             this.$store.commit('fetchTags')
         }
+
         // get selectedTag(){
+        //     this.$emit('update:value',this.tagList[0]);
         //    return  this.tagList[0];
         // }
-        // set selectedTag(a){
-        //     this.selectedTag=a
-        // }
-      selectedTag: Tag=this.tagList[0];
+
+        selectedTag: Tag = this.tagList[0];
+        @Watch('type',{immediate:true})
+        onTypeChanged(){
+            this.selectedTag=this.tagList[0]
+        }
+        getSelectedTag(){
+            console.log('xxx');
+           return  this.tagList[0]
+        }
+        created(){
+            this.$emit('update:value',this.selectedTag);
+        }
         toggle(tag: Tag) {
-            this.selectedTag=tag;
+                this.selectedTag=tag;
                 this.$emit('update:value',this.selectedTag);
         }
-        // create(){
-        //     const name =window.prompt('请输入标签名');
-        //     if(name){
-        //         this.$store.commit('createTag',name);
-        //     }
-        // }
     }
 </script>
 
