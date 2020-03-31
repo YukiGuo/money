@@ -41,7 +41,7 @@ function getBar(data: BarList) {
                 position: 'top',
                 fontSize: 8,
                 color: '#E44E4E',
-                formatter: function (params) {
+                formatter: function (params: { value: number }) {
                     if (params.value > 0) {
                         return params.value;
                     } else {
