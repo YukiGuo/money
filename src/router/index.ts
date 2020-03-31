@@ -25,7 +25,8 @@ const routes = [
     },
     {
         path:'/bill/edict',
-        component: BillEdict
+        component: BillEdict,
+        name: 'newLocation'
     },
     {
         path:'/statistics',

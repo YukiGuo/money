@@ -15,10 +15,11 @@
                         <span> {{ beautify(group.title)}}</span>
                         <span>￥{{group.total.toFixed(2)}}</span>
                     </div>
-                    <router-link to="/bill/edict"
+                    <div
                             v-for="(item,index) in group.items" :key="index"
                             class="item"
                             :class="{income:item.type==='+'}"
+                            @click="goEdict(item)"
                     >
                         <Icon class="logo" :name="item.tag.icon"/>
                         <span class="tag">
@@ -27,7 +28,7 @@
                         <span class="money">
                                 <span>{{item.type}} {{item.amount}}</span>
                             </span>
-                    </router-link>
+                    </div>
                 </div>
             </div>
         </Layout>
@@ -61,7 +62,6 @@
             if (recordList.length === 0) {
                 return [] as GroupList;
             }
-
             const newList = clone(this.selectedList!)
                 .sort((a, b) => dayjs(b.createdDate).valueOf() - dayjs(a.createdDate).valueOf());
             if (newList.length === 0) {
@@ -131,6 +131,10 @@
 
         beforeCreate() {
             this.$store.commit('fetchRecords');
+        }
+       goEdict(item: RecordItem){
+           console.log(item);
+           this.$router.push({name: 'newLocation',params:{item:JSON.stringify(item)}})
         }
     }
 </script>

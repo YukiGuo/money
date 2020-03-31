@@ -44,8 +44,8 @@
         typeList=typeList;
         type='-';
         get tagList(){
-      //    return  this.$store.state.tagList;
-            return tagArray.filter(t=>t.type===this.type);
+       return  this.$store.state.tagList.filter((t: Tag)=>t.type===this.type);
+
         }
         created(){
             this.$store.commit('fetchTags')
