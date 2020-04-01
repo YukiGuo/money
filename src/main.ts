@@ -26,7 +26,7 @@ window.onload=function () {
 if(document.documentElement.clientWidth>=500){
   window.alert('手机预览，效果更佳哦~');
   const img= document.createElement('img');
-  img.src='/code.png';
+  img.src='/LemonMoney/code.png';
   img.style.position='fixed';
   img.style.left='50%';
   img.style.top='50%';
