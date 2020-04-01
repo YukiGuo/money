@@ -23,7 +23,18 @@ window.onload=function () {
   setTimeout(function () {
       window.scrollTo(0,200)
   });
-if(document.documentElement.clientWidth>500){
-  window.alert('手机预览，效果更佳哦~')
+if(document.documentElement.clientWidth>=500){
+  window.alert('手机预览，效果更佳哦~');
+  const img= document.createElement('img');
+  img.src='/code.png';
+  img.style.position='fixed';
+  img.style.left='50%';
+  img.style.top='50%';
+  img.style.transform='translate(-50%,-50%)';
+  img.style.boxShadow='0,0,10px rgba(0,0,0,0.25)';
+setTimeout(function () {
+img.remove();
+},8000);
+  document.body.append(img)
 }
 };
