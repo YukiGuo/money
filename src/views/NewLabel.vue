@@ -52,7 +52,7 @@
 
         goBack() {
             console.log('xxx');
-            this.$router.back();
+
         }
 
         created() {
@@ -62,7 +62,9 @@
             } else {
                 this.selectedIconList = iconList.income;
             }
+            this.goBack();
         }
+
     }
 </script>
 

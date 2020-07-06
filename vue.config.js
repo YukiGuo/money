@@ -2,9 +2,8 @@
 const path = require('path');
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
-      ? '/LemonMoney/'
-      : '/',
-  lintOnSave: false,
+      ? '/lemonMoney/'
+      : '/',  lintOnSave: false,
   transpileDependencies: [
     'vue-echarts',
     'resize-detector'

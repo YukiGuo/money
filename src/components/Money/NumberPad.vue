@@ -129,10 +129,6 @@
                     height: 100px;
                     float: right;
                 }
-
-                &.zero {
-                    width: 50%;
-                }
             }
         }
     }

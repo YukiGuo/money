@@ -28,6 +28,8 @@ const store = new Vuex.Store({
             const copy = clone(record);
             state.recordList?.push(copy);
             store.commit('saveRecords');
+            window.alert('保存成功')
+
         },
         deleteRecord(state,record: RecordItem){
             const id=record.id;
@@ -51,11 +53,6 @@ const store = new Vuex.Store({
             window.localStorage.setItem('tagList', JSON.stringify(state.tagList));
         },
         removeTag(state, id) {
-            // const index= state.tagList.indexOf(tag);
-            // state.tagList.splice(index,1);
-            // store.commit('saveTags');
-
-
             let index = -1;
             for (let i = 0; i < state.tagList.length; i++) {
                 if (state.tagList[i].id === id) {
@@ -66,7 +63,7 @@ const store = new Vuex.Store({
             if (index >= 0) {
                 state.tagList.splice(index, 1);
                 store.commit('saveTags');
-                alert('删除成功');
+                window.alert('删除成功');
                 router.back();
             } else {
                 window.alert('删除失败');
